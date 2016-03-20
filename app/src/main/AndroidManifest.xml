@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="wqyap762.rprqs" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo2"
+        android:label="RPRQS"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Log in" >
+        </activity>
+        <activity
+            android:name=".RegisterAccountActivity"
+            android:label="@string/title_activity_register_account"
+            android:parentActivityName=".LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".OrderFoodActivity"
+            android:label="@string/title_activity_order_food"
+            android:parentActivityName=".CustomerMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.CustomerMainActivity" />
+        </activity>
+        <activity
+            android:name=".CustomerMainActivity"
+            android:label="@string/title_activity_customer_main" >
+        </activity>
+        <activity
+            android:name=".AdminMainActivity"
+            android:label="@string/title_activity_admin_main" >
+        </activity>
+        <activity
+            android:name=".SetOrderActivity"
+            android:label="@string/title_activity_set_order"
+            android:parentActivityName=".OrderFoodActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderFoodActivity" />
+        </activity>
+        <activity
+            android:name=".RiceOrderActivity"
+            android:label="@string/title_activity_rice_order"
+            android:parentActivityName=".OrderFoodActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderFoodActivity" />
+        </activity>
+        <activity
+            android:name=".NoodlesOrderActivity"
+            android:label="@string/title_activity_noodles_order"
+            android:parentActivityName=".OrderFoodActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderFoodActivity" />
+        </activity>
+        <activity
+            android:name=".BeveragesOrderActivity"
+            android:label="@string/title_activity_beverages_order"
+            android:parentActivityName=".OrderFoodActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderFoodActivity" />
+        </activity>
+        <activity
+            android:name=".HomemadeDessertsOrderActivity"
+            android:label="@string/title_activity_homemade_desserts_order"
+            android:parentActivityName=".OrderFoodActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderFoodActivity" />
+        </activity>
+        <activity
+            android:name=".HomemadeBeveragesOrderActivity"
+            android:label="@string/title_activity_homemade_beverages_order"
+            android:parentActivityName=".OrderFoodActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderFoodActivity" />
+        </activity>
+        <activity
+            android:name=".ManageOrderAdminActivity"
+            android:label="@string/title_activity_manage_order_admin"
+            android:parentActivityName=".AdminMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.AdminMainActivity" />
+        </activity>
+        <activity
+            android:name=".OrderInfoAdminActivity"
+            android:label="@string/title_activity_order_info_admin"
+            android:parentActivityName=".ManageOrderAdminActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.ManageOrderAdminActivity" />
+        </activity>
+        <activity
+            android:name=".OrderUpdateAdminActivity"
+            android:label="@string/title_activity_order_update_admin"
+            android:parentActivityName=".OrderInfoAdminActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderInfoAdminActivity" />
+        </activity>
+        <activity
+            android:name=".SetAActivity"
+            android:label="@string/title_activity_set_a"
+            android:parentActivityName=".SetOrderActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.SetOrderActivity" />
+        </activity>
+        <activity
+            android:name=".ManageOrderCustomerActivity"
+            android:label="@string/title_activity_manage_order_customer"
+            android:parentActivityName=".CustomerMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.CustomerMainActivity" />
+        </activity>
+        <activity
+            android:name=".OrderInfoCustomerActivity"
+            android:label="@string/title_activity_order_info_customer"
+            android:parentActivityName=".ManageOrderCustomerActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.ManageOrderCustomerActivity" />
+        </activity>
+        <activity
+            android:name=".OrderUpdateCustomerActivity"
+            android:label="@string/title_activity_order_update_customer"
+            android:parentActivityName=".OrderInfoCustomerActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.OrderInfoCustomerActivity" />
+        </activity>
+        <activity
+            android:name=".TrackWaitingTimeAdminActivity"
+            android:label="@string/title_activity_track_waiting_time_admin"
+            android:parentActivityName=".AdminMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.AdminMainActivity" />
+        </activity>
+        <activity
+            android:name=".TrackOrderAdminActivity"
+            android:label="@string/title_activity_track_order_admin"
+            android:parentActivityName=".TrackWaitingTimeAdminActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.TrackWaitingTimeAdminActivity" />
+        </activity>
+        <activity
+            android:name=".TrackWaitingTimeCustomerActivity"
+            android:label="@string/title_activity_track_waiting_time_customer"
+            android:parentActivityName=".CustomerMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.CustomerMainActivity" />
+        </activity>
+        <activity
+            android:name=".TrackOrderCustomerActivity"
+            android:label="@string/title_activity_track_order_customer"
+            android:parentActivityName=".TrackWaitingTimeCustomerActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.TrackWaitingTimeCustomerActivity" />
+        </activity>
+        <activity
+            android:name=".ViewReportActivity"
+            android:label="@string/title_activity_view_report"
+            android:parentActivityName=".AdminMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="wqyap762.rprqs.AdminMainActivity" />
+        </activity>
+    </application>
+
+</manifest>

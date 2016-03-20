@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">RPRQS</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="PasswordText">Password</string>
+    <string name="UsernameText">Username</string>
+    <string name="SignInButton">Sign in</string>
+    <string name="title_activity_login">Log in</string>
+    <string name="title_activity_register_account">Register Account</string>
+    <string name="title_activity_order_food">Order Food</string>
+    <string name="RegisterAccountLink">Sign up for an account</string>
+    <string name="title_activity_customer_main">Menu</string>
+    <string name="title_activity_admin_main">Menu</string>
+    <string name="title_activity_main">RPRQS</string>
+    <string name="title_activity_set_order">Set Lunch / Set Dinner</string>
+    <string name="title_activity_rice_order">Rice</string>
+    <string name="title_activity_noodles_order">Noodles</string>
+    <string name="title_activity_beverages_order">Beverages</string>
+    <string name="title_activity_homemade_desserts_order">Homemade Desserts</string>
+    <string name="title_activity_homemade_beverages_order">Homemade Beverages</string>
+    <string name="title_activity_manage_order_admin">Order List</string>
+    <string name="title_activity_order_info_admin">Order Information</string>
+    <string name="title_activity_order_update_admin">Order Update</string>
+    <string name="title_activity_set_a">Set A</string>
+    <string name="title_activity_manage_order_customer">Order List</string>
+    <string name="title_activity_order_info_customer">Order Information</string>
+    <string name="title_activity_order_update_customer">Order Update</string>
+    <string name="LogOutButton">Log out</string>
+    <string name="title_activity_track_waiting_time_admin">Order List</string>
+    <string name="title_activity_track_order_admin">Track Order</string>
+    <string name="title_activity_track_waiting_time_customer">Order List
+    </string>
+    <string name="title_activity_track_order_customer">Track Order</string>
+    <string name="title_activity_view_report">Report</string>
+</resources>
