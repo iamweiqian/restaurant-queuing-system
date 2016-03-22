@@ -1,5 +1,6 @@
 package wqyap762.rprqs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,11 +16,10 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 
-public class RegisterAccountActivity extends ActionBarActivity {
+public class RegisterAccountActivity extends Activity {
 
     EditText fullNameText, usernameText, passwordText, confirmPasswordText, hpnoText;
-    MyDBHandler dbHandler = new MyDBHandler(this);
-    User user;
+    String fullname, username, password, hpno, user_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class RegisterAccountActivity extends ActionBarActivity {
                     public void onClick(final View v) {
 
                         // check empty fields
-                        String uname = dbHandler.searchUsername(usernameText.getText().toString());
-                        if (usernameText.getText().toString().equals(uname)) {
+                        // String uname = dbHandler.searchUsername(usernameText.getText().toString());
+                        /*if (usernameText.getText().toString().equals(uname)) {
                             usernameText.setError("This username is unavailable.");
                             return;
-                        } else if (TextUtils.isEmpty(fullNameText.getText().toString())) {
+                        } else*/ if (TextUtils.isEmpty(fullNameText.getText().toString())) {
                             fullNameText.setError("Please enter your full name.");
                             return;
                         } else if (TextUtils.isEmpty(usernameText.getText().toString())) {
@@ -82,7 +82,7 @@ public class RegisterAccountActivity extends ActionBarActivity {
 
                         // if all fields filled
                         if (!TextUtils.isEmpty(fullNameText.getText().toString()) && !TextUtils.isEmpty(usernameText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString())) {
-                            if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString()) && !usernameText.getText().toString().equals(uname)) {
+                            if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString())/* && !usernameText.getText().toString().equals(uname)*/) {
                                 AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterAccountActivity.this);
 
                                 // setting dialog title
@@ -159,43 +159,15 @@ public class RegisterAccountActivity extends ActionBarActivity {
     }
 
     public void registerButtonClicked(View v) {
-        if (v.getId() == R.id.registerAccountButton) {
-            fullNameText = (EditText) findViewById(R.id.fullNameText);
-            usernameText = (EditText) findViewById(R.id.usernameText);
-            passwordText = (EditText) findViewById(R.id.passwordText);
-            confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
-            hpnoText = (EditText) findViewById(R.id.hpnoText);
-
-            user = new User();
-            user.set_fullname(fullNameText.getText().toString());
-            user.set_username(usernameText.getText().toString());
-            user.set_password(passwordText.getText().toString());
-            user.set_hpno(Integer.parseInt(hpnoText.getText().toString()));
-
-            dbHandler.createUser(user);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_register_account, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        fullname = fullNameText.getText().toString();
+        username = usernameText.getText().toString();
+        password = passwordText.getText().toString();
+        hpno = hpnoText.getText().toString();
+        user_state = "2";
+        String method = "register";
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.execute(method, fullname, username, password, hpno, user_state);
+        finish();
     }
 
     public void goToLoginActivity() {

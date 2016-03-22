@@ -11,11 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
 public class SetAActivity extends ActionBarActivity {
-    String quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +22,13 @@ public class SetAActivity extends ActionBarActivity {
         setContentView(R.layout.activity_set_a);
 
         // customer order
-        Button customerOrderButton = (Button) findViewById(R.id.customerOrderButton);
-        customerOrderButton.setOnClickListener(
+        Button setAOrderButton = (Button) findViewById(R.id.setAOrderButton);
+        setAOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        EditText quantityText = (EditText) findViewById(R.id.quantityText);
-                        if (TextUtils.isEmpty(quantityText.getText().toString())) {
-                            quantityText.setError("Please enter quantity.");
+                    public void onClick(final View v) {
+                        EditText setAQuantityText = (EditText) findViewById(R.id.setAQuantityText);
+                        if (TextUtils.isEmpty(setAQuantityText.getText().toString())) {
+                            setAQuantityText.setError("Please enter quantity.");
                             return;
                         } else {
                             final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(SetAActivity.this);
@@ -48,6 +47,8 @@ public class SetAActivity extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // user press Proceed button. Write logic here
+                                    setAButtonClicked(v);
+
                                     AlertDialog.Builder orderDone = new AlertDialog.Builder(SetAActivity.this);
 
                                     // setting dialog title
@@ -85,6 +86,10 @@ public class SetAActivity extends ActionBarActivity {
                     }
                 }
         );
+    }
+
+    public void setAButtonClicked (View v) {
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package wqyap762.rprqs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
@@ -18,24 +19,23 @@ import android.content.Intent;
 import android.widget.Toast;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends Activity {
 
     EditText usernameText, passwordText;
-    MyDBHandler dbHandler = new MyDBHandler(this);
+    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        usernameText = (EditText) findViewById(R.id.usernameText);
+        passwordText = (EditText) findViewById(R.id.passwordText);
 
         // sign in button
         Button signiInButton = (Button) findViewById(R.id.signInButton);
         signiInButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        usernameText = (EditText) findViewById(R.id.usernameText);
-                        passwordText = (EditText) findViewById(R.id.passwordText);
-
                         if (TextUtils.isEmpty(usernameText.getText().toString())) {
                             usernameText.setError("Please enter username");
                             return;
@@ -70,7 +70,12 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     public void loginButtonClicked(View v) {
-        if (v.getId() == R.id.signInButton) {
+        username = usernameText.getText().toString();
+        password = passwordText.getText().toString();
+        String method = "login";
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.execute(method, username, password);
+        /*if (v.getId() == R.id.signInButton) {
             //usernameText = (EditText) findViewById(R.id.usernameText);
             //passwordText = (EditText) findViewById(R.id.passwordText);
 
@@ -102,29 +107,7 @@ public class LoginActivity extends ActionBarActivity {
                 });
                 loginError.show();
             }
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        }*/
     }
 
     public boolean onKeyDown(int keycode, KeyEvent event) {
