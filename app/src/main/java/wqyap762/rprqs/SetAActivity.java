@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 
 public class SetAActivity extends ActionBarActivity {
+    TextView totalPriceText;
+    EditText setAQuantityText;
+    String total_price, quantity, payment_status, username, menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +92,15 @@ public class SetAActivity extends ActionBarActivity {
     }
 
     public void setAButtonClicked (View v) {
-
+        total_price = "6";
+        quantity = "1";
+        payment_status = "Unpaid";
+        username = "wqyap762";
+        menu_id = "S001";
+        String method = "order";
+        OrderTask orderTask = new OrderTask(this);
+        orderTask.execute(method, total_price, quantity, payment_status, username, menu_id);
+        finish();
     }
 
     @Override

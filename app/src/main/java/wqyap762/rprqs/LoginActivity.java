@@ -22,7 +22,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText usernameText, passwordText;
-    String username, password, user_state;
+    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
