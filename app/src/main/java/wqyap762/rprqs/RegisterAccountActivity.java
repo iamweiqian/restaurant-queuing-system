@@ -18,15 +18,15 @@ import java.util.regex.Matcher;
 
 public class RegisterAccountActivity extends Activity {
 
-    EditText fullNameText, usernameText, passwordText, confirmPasswordText, hpnoText;
-    String fullname, username, password, hpno, user_state;
+    EditText nameText, usernameText, passwordText, confirmPasswordText, hpnoText;
+    String name, username, password, hpno, user_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_account);
 
-        fullNameText = (EditText) findViewById(R.id.fullNameText);
+        nameText = (EditText) findViewById(R.id.nameText);
         usernameText = (EditText) findViewById(R.id.usernameText);
         passwordText = (EditText) findViewById(R.id.passwordText);
         confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
@@ -43,8 +43,8 @@ public class RegisterAccountActivity extends Activity {
                         /*if (usernameText.getText().toString().equals(uname)) {
                             usernameText.setError("This username is unavailable.");
                             return;
-                        } else*/ if (TextUtils.isEmpty(fullNameText.getText().toString())) {
-                            fullNameText.setError("Please enter your full name.");
+                        } else*/ if (TextUtils.isEmpty(nameText.getText().toString())) {
+                            nameText.setError("Please enter your full name.");
                             return;
                         } else if (TextUtils.isEmpty(usernameText.getText().toString())) {
                             usernameText.setError("Please enter username.");
@@ -81,7 +81,7 @@ public class RegisterAccountActivity extends Activity {
                         }
 
                         // if all fields filled
-                        if (!TextUtils.isEmpty(fullNameText.getText().toString()) && !TextUtils.isEmpty(usernameText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString())) {
+                        if (!TextUtils.isEmpty(nameText.getText().toString()) && !TextUtils.isEmpty(usernameText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString())) {
                             if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString())/* && !usernameText.getText().toString().equals(uname)*/) {
                                 AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterAccountActivity.this);
 
@@ -159,14 +159,14 @@ public class RegisterAccountActivity extends Activity {
     }
 
     public void registerButtonClicked(View v) {
-        fullname = fullNameText.getText().toString();
         username = usernameText.getText().toString();
         password = passwordText.getText().toString();
+        name = nameText.getText().toString();
         hpno = hpnoText.getText().toString();
         user_state = "2";
         String method = "register";
         BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method, fullname, username, password, hpno, user_state);
+        backgroundTask.execute(method, username, password, name, hpno, user_state);
         finish();
     }
 

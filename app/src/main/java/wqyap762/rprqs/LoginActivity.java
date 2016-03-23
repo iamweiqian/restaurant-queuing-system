@@ -22,7 +22,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText usernameText, passwordText;
-    String username, password;
+    String username, password, user_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,11 @@ public class LoginActivity extends Activity {
         String method = "login";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method, username, password);
+        if (username.equals("admin")){
+            goToAdminMainActivity();
+        } else {
+            goToCustomerMainActivity();
+        }
         /*if (v.getId() == R.id.signInButton) {
             //usernameText = (EditText) findViewById(R.id.usernameText);
             //passwordText = (EditText) findViewById(R.id.passwordText);

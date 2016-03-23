@@ -19,7 +19,7 @@
             android:inputType="textCapWords"
             android:hint="Full Name"
             android:ems="10"
-            android:id="@+id/fullNameText"
+            android:id="@+id/nameText"
             android:layout_row="1"
             android:layout_column="0" />
 

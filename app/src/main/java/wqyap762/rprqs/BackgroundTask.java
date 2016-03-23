@@ -1,6 +1,9 @@
 package wqyap762.rprqs;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
@@ -21,11 +24,11 @@ import java.net.URLEncoder;
  * Created by wqyap762 on 22/03/16.
  */
 public class BackgroundTask extends AsyncTask<String, Void, String> {
+    Activity activity;
     AlertDialog alertDialog;
     Context context;
     BackgroundTask(Context context) {
         this.context = context;
-
     }
 
     @Override
@@ -36,13 +39,13 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String reg_url = "http://10.0.2.2:8888/RPRQS/RegisterAccount.php";
-        String login_url = "http://10.0.2.2:8888/RPRQS/Login.php";
+        String reg_url = "http://rprqs.16mb.com/RegisterAccount.php";
+        String login_url = "http://rprqs.16mb.com/Login.php";
         String method = params[0];
         if (method.equals("register")) {
-            String fullname = params[1];
-            String username = params[2];
-            String password = params[3];
+            String username = params[1];
+            String password = params[2];
+            String name = params[3];
             String hpno = params[4];
             String user_state = params[5];
             try {
@@ -52,9 +55,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoOutput(true);
                 OutputStream OS = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                String data = URLEncoder.encode("fullname", "UTF-8") + "=" + URLEncoder.encode(fullname, "UTF-8") + "&" +
-                        URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
+                String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
                         URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&" +
+                        URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
                         URLEncoder.encode("hpno", "UTF-8") + "=" + URLEncoder.encode(hpno, "UTF-8") + "&" +
                         URLEncoder.encode("user_state", "UTF-8") + "=" + URLEncoder.encode(user_state, "UTF-8");
                 bufferedWriter.write(data);
@@ -82,7 +85,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
-                        URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                        URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&";
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -99,7 +102,6 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return response;
-
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -122,6 +124,5 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             alertDialog.setMessage(result);
             alertDialog.show();
         }
-
     }
 }
