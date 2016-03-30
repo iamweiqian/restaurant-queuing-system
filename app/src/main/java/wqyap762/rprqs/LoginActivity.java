@@ -48,6 +48,7 @@ public class LoginActivity extends Activity {
                             return;
                         } else {
                             loginButtonClicked(v);
+                            goToCustomerMainActivity();
                         }
                     }
                 }
@@ -75,11 +76,6 @@ public class LoginActivity extends Activity {
         String method = "login";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method, username, password);
-        if (username.equals("admin")){
-            goToAdminMainActivity();
-        } else {
-            goToCustomerMainActivity();
-        }
         /*if (v.getId() == R.id.signInButton) {
             //usernameText = (EditText) findViewById(R.id.usernameText);
             //passwordText = (EditText) findViewById(R.id.passwordText);
@@ -149,11 +145,6 @@ public class LoginActivity extends Activity {
             closeButton.show();
         }
         return super.onKeyDown(keycode, event);
-    }
-
-    public void goToAdminMainActivity() {
-        Intent intent = new Intent(this, AdminMainActivity.class);
-        startActivity(intent);
     }
 
     public void goToCustomerMainActivity() {
