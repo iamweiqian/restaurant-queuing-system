@@ -1,6 +1,7 @@
 package wqyap762.rprqs;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,7 +26,6 @@ import java.net.URLEncoder;
  */
 public class BackgroundTask extends AsyncTask<String, Void, String> {
     Activity activity;
-    AlertDialog alertDialog;
     Context context;
     BackgroundTask(Context context) {
         this.context = context;
@@ -33,8 +33,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Information");
+//        alertDialog = new AlertDialog.Builder(context).create();
+//        alertDialog.setTitle("Login Status");
     }
 
     @Override
@@ -119,10 +119,10 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         if (result.equals("Registration Success")) {
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         } else {
-            alertDialog.setMessage(result);
-            alertDialog.show();
+            super.onPostExecute(result);
+            context.startActivity(new Intent(context, CustomerMainActivity.class));
         }
     }
 }

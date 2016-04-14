@@ -18,16 +18,23 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class LoginActivity extends Activity {
 
     EditText usernameText, passwordText;
-    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         usernameText = (EditText) findViewById(R.id.usernameText);
         passwordText = (EditText) findViewById(R.id.passwordText);
 
@@ -48,7 +55,7 @@ public class LoginActivity extends Activity {
                             return;
                         } else {
                             loginButtonClicked(v);
-                            goToCustomerMainActivity();
+//                            goToCustomerMainActivity();
                         }
                     }
                 }
@@ -71,44 +78,50 @@ public class LoginActivity extends Activity {
     }
 
     public void loginButtonClicked(View v) {
-        username = usernameText.getText().toString();
-        password = passwordText.getText().toString();
-        String method = "login";
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method, username, password);
-        /*if (v.getId() == R.id.signInButton) {
-            //usernameText = (EditText) findViewById(R.id.usernameText);
-            //passwordText = (EditText) findViewById(R.id.passwordText);
+        usernameText = (EditText) findViewById(R.id.usernameText);
+        passwordText = (EditText) findViewById(R.id.passwordText);
+        final String username = usernameText.getText().toString();
+        final String password = passwordText.getText().toString();
 
-            String pass = dbHandler.searchPassword(usernameText.getText().toString());
-            if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
-                goToAdminMainActivity();
-            } else if (passwordText.getText().toString().equals(pass)) {
-                goToCustomerMainActivity();
-            } else {
-                AlertDialog.Builder loginError = new AlertDialog.Builder(LoginActivity.this);
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
 
-                // setting dialog title
-                loginError.setTitle("Invalid");
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
 
-                // setting dialog message
-                loginError.setMessage("Username or Password is not correct.");
+                    if (success) {
+                        String name = jsonResponse.getString("name");
+                        String hpno = jsonResponse.getString("hpno");
 
-                // setting icon to dialog
-                //orderConfirm.setIcon(R.drawable.save);
+                        Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
+                        intent.putExtra("username", username);
+                        intent.putExtra("name", name);
+                        intent.putExtra("hpno", hpno);
 
-                // setting positive "Okay" button
-                loginError.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // user press Proceed button. Write logic here
-                        passwordText.setText("");
-                        dialog.dismiss();
+                        LoginActivity.this.startActivity(intent);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Login Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
                     }
-                });
-                loginError.show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }*/
+        };
+
+
+        LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        queue.add(loginRequest);
+
+        /*String method = "login";
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.execute(method, username, password);*/
     }
 
     public boolean onKeyDown(int keycode, KeyEvent event) {
@@ -147,13 +160,13 @@ public class LoginActivity extends Activity {
         return super.onKeyDown(keycode, event);
     }
 
-    public void goToCustomerMainActivity() {
-        Intent intent = new Intent(this, CustomerMainActivity.class);
+    public void goToRegisterAccountActivity() {
+        Intent intent = new Intent(this, RegisterAccountActivity.class);
         startActivity(intent);
     }
 
-    public void goToRegisterAccountActivity() {
-        Intent intent = new Intent(this, RegisterAccountActivity.class);
+    public void goToCustomerMainActivity() {
+        Intent intent = new Intent(this, CustomerMainActivity.class);
         startActivity(intent);
     }
 

@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,23 +15,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class SetAActivity extends ActionBarActivity {
-    TextView totalPriceText;
+
+    TextView basicPriceText, totalPriceText;
     EditText setAQuantityText;
-    String total_price, quantity, payment_status, username, menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_a);
 
+        basicPriceText = (TextView) findViewById(R.id.basicPriceText);
+        totalPriceText = (TextView) findViewById(R.id.totalPriceText);
+        setAQuantityText = (EditText) findViewById(R.id.setAQuantityText);
+
+        totalPriceCalculated();
+
         // customer order
         Button setAOrderButton = (Button) findViewById(R.id.setAOrderButton);
         setAOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(final View v) {
-                        EditText setAQuantityText = (EditText) findViewById(R.id.setAQuantityText);
                         if (TextUtils.isEmpty(setAQuantityText.getText().toString())) {
                             setAQuantityText.setError("Please enter quantity.");
                             return;
@@ -91,16 +105,61 @@ public class SetAActivity extends ActionBarActivity {
         );
     }
 
+    public void totalPriceCalculated() {
+        setAQuantityText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
+                Double quantity = Double.parseDouble(setAQuantityText.getText().toString());
+                totalPriceText.setText("RM " + basicPrice * quantity);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
     public void setAButtonClicked (View v) {
-        total_price = "6";
-        quantity = "1";
-        payment_status = "Unpaid";
-        username = "wqyap762";
-        menu_id = "S001";
-        String method = "order";
-        OrderTask orderTask = new OrderTask(this);
-        orderTask.execute(method, total_price, quantity, payment_status, username, menu_id);
-        finish();
+        Intent intent = getIntent();
+        final int total_price = Integer.parseInt(totalPriceText.getText().toString());
+        final int quantity = Integer.parseInt(setAQuantityText.getText().toString());
+        final String payment_status = "Unpaid";
+        final String username = intent.getStringExtra("username");
+        final String menu_id = "S001";
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success) {
+                        goToOrderInfoCustomerActivity();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SetAActivity.this);
+                        builder.setMessage("Order Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, username, menu_id, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(SetAActivity.this);
+        queue.add(orderRequest);
     }
 
     @Override

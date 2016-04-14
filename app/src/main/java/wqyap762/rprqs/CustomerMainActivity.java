@@ -18,6 +18,19 @@ public class CustomerMainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        String name = intent.getStringExtra("name");
+        String hpno = intent.getStringExtra("hpno");
+
+        String message = "Welcome! " + name;
+        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerMainActivity.this);
+        builder.setMessage(message)
+                .setNeutralButton("Okay", null)
+                .create()
+                .show();
+
+
         // order food button
         Button orderFoodButton = (Button) findViewById(R.id.orderFoodButton);
         orderFoodButton.setOnClickListener(

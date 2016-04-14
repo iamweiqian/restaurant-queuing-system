@@ -12,6 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -19,7 +27,6 @@ import java.util.regex.Matcher;
 public class RegisterAccountActivity extends Activity {
 
     EditText nameText, usernameText, passwordText, confirmPasswordText, hpnoText;
-    String name, username, password, hpno, user_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,6 @@ public class RegisterAccountActivity extends Activity {
         registerAccountButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(final View v) {
-
                         // check empty fields
                         // String uname = dbHandler.searchUsername(usernameText.getText().toString());
                         /*if (usernameText.getText().toString().equals(uname)) {
@@ -100,27 +106,7 @@ public class RegisterAccountActivity extends Activity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         // user press Proceed button. Write logic here
                                         registerButtonClicked(v);
-
-                                        AlertDialog.Builder registrationDone = new AlertDialog.Builder(RegisterAccountActivity.this);
-
-                                        // setting dialog title
-                                        registrationDone.setTitle("Register Successfully!");
-
-                                        // setting dialog message
-                                        registrationDone.setMessage("Your account has been registered successfully.");
-
-                                        // setting icon to dialog
-                                        //orderConfirm.setIcon(R.drawable.save);
-
-                                        // setting positive "Okay" button
-                                        registrationDone.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                // user press Proceed button. Write logic here
-                                                goToLoginActivity();
-                                            }
-                                        });
-                                        registrationDone.show();
+                                        registrationDone();
                                     }
                                 });
 
@@ -159,15 +145,67 @@ public class RegisterAccountActivity extends Activity {
     }
 
     public void registerButtonClicked(View v) {
-        username = usernameText.getText().toString();
-        password = passwordText.getText().toString();
-        name = nameText.getText().toString();
-        hpno = hpnoText.getText().toString();
-        user_state = "2";
-        String method = "register";
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method, username, password, name, hpno, user_state);
-        finish();
+        final String username = usernameText.getText().toString();
+        final String password = passwordText.getText().toString();
+        final String name = nameText.getText().toString();
+        final String hpno = hpnoText.getText().toString();
+        final String user_state = "2";
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success) {
+                        Intent intent = new Intent(RegisterAccountActivity.this, LoginActivity.class);
+                        RegisterAccountActivity.this.startActivity(intent);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterAccountActivity.this);
+                        builder.setMessage("Register Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        RegisterRequest registerRequest = new RegisterRequest(username, password, name, hpno, Integer.parseInt(user_state), responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RegisterAccountActivity.this);
+        queue.add(registerRequest);
+
+//        String method = "register";
+//        BackgroundTask backgroundTask = new BackgroundTask(this);
+//        backgroundTask.execute(method, username, password, name, hpno, user_state);
+//        finish();
+    }
+
+    public void registrationDone() {
+        AlertDialog.Builder registrationDone = new AlertDialog.Builder(RegisterAccountActivity.this);
+
+        // setting dialog title
+        registrationDone.setTitle("Register Successfully!");
+
+        // setting dialog message
+        registrationDone.setMessage("Your account has been registered successfully.");
+
+        // setting icon to dialog
+        //orderConfirm.setIcon(R.drawable.save);
+
+        // setting positive "Okay" button
+        registrationDone.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user press Proceed button. Write logic here
+                goToLoginActivity();
+            }
+        });
+        registrationDone.show();
     }
 
     public void goToLoginActivity() {
