@@ -1,8 +1,10 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,20 +25,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class SetAActivity extends ActionBarActivity {
+public class ItemActivity extends ActionBarActivity {
 
-    TextView basicPriceText, totalPriceText;
+    public static final String DEFAULT = "N/A";
+    TextView foodNameText, descriptionText, basicPriceText, totalPriceText;
     EditText setAQuantityText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_a);
+        setContentView(R.layout.activity_item);
 
+        foodNameText = (TextView) findViewById(R.id.foodNameText);
+        descriptionText = (TextView) findViewById(R.id.descriptionText);
         basicPriceText = (TextView) findViewById(R.id.basicPriceText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
         setAQuantityText = (EditText) findViewById(R.id.setAQuantityText);
 
+        getMenu();
         totalPriceCalculated();
 
         // customer order
@@ -48,7 +54,7 @@ public class SetAActivity extends ActionBarActivity {
                             setAQuantityText.setError("Please enter quantity.");
                             return;
                         } else {
-                            final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(SetAActivity.this);
+                            final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(ItemActivity.this);
 
                             // setting dialog title
                             orderConfirm.setTitle("Confirm Order");
@@ -65,27 +71,6 @@ public class SetAActivity extends ActionBarActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // user press Proceed button. Write logic here
                                     setAButtonClicked(v);
-
-                                    AlertDialog.Builder orderDone = new AlertDialog.Builder(SetAActivity.this);
-
-                                    // setting dialog title
-                                    orderDone.setTitle("Order Successfully!");
-
-                                    // setting dialog message
-                                    orderDone.setMessage("Your order has been placed successfully.");
-
-                                    // setting icon to dialog
-                                    //orderConfirm.setIcon(R.drawable.save);
-
-                                    // setting positive "Okay" button
-                                    orderDone.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            // user press Proceed button. Write logic here
-                                            goToOrderInfoCustomerActivity();
-                                        }
-                                    });
-                                    orderDone.show();
                                 }
                             });
 
@@ -105,34 +90,9 @@ public class SetAActivity extends ActionBarActivity {
         );
     }
 
-    public void totalPriceCalculated() {
-        setAQuantityText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
-                Double quantity = Double.parseDouble(setAQuantityText.getText().toString());
-                totalPriceText.setText("RM " + basicPrice * quantity);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
-    public void setAButtonClicked (View v) {
+    public void getMenu() {
         Intent intent = getIntent();
-        final int total_price = Integer.parseInt(totalPriceText.getText().toString());
-        final int quantity = Integer.parseInt(setAQuantityText.getText().toString());
-        final String payment_status = "Unpaid";
-        final String username = intent.getStringExtra("username");
-        final String menu_id = "S001";
+        String menu_id = intent.getStringExtra("menu_id");
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
 
@@ -143,9 +103,79 @@ public class SetAActivity extends ActionBarActivity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
-                        goToOrderInfoCustomerActivity();
+                        String food_name = jsonResponse.getString("food_name");
+                        String description = jsonResponse.getString("description");
+                        String basic_price = jsonResponse.getString("basic_price");
+
+                        foodNameText.setText(food_name);
+                        descriptionText.setText(description);
+                        basicPriceText.setText(basic_price);
                     } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(SetAActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
+                        builder.setMessage("Item Retrieve Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        MenuRequest menuRequest = new MenuRequest(menu_id, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
+        queue.add(menuRequest);
+    }
+
+    public void totalPriceCalculated() {
+        setAQuantityText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(setAQuantityText.getText().toString())) {
+                    Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
+                    Double quantity = Double.parseDouble(setAQuantityText.getText().toString());
+                    totalPriceText.setText(String.valueOf(basicPrice * quantity));
+                } else {
+                    setAQuantityText.setError("Please enter quantity.");
+                    return;
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    public void setAButtonClicked (View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        Intent intent = getIntent();
+        final Double total_price = Double.parseDouble(totalPriceText.getText().toString());
+        final int quantity = Integer.parseInt(setAQuantityText.getText().toString());
+        final String payment_status = "Unpaid";
+        final String username = sharedPreferences.getString("username", DEFAULT);
+        final String menu_id = intent.getStringExtra("menu_id");
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success) {
+                        orderDone();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
                         builder.setMessage("Order Failed")
                                 .setNegativeButton("Retry", null)
                                 .create()
@@ -158,14 +188,37 @@ public class SetAActivity extends ActionBarActivity {
         };
 
         OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, username, menu_id, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(SetAActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
         queue.add(orderRequest);
+    }
+
+    public void orderDone() {
+        AlertDialog.Builder orderDone = new AlertDialog.Builder(ItemActivity.this);
+
+        // setting dialog title
+        orderDone.setTitle("Order Successfully!");
+
+        // setting dialog message
+        orderDone.setMessage("Your order has been placed successfully.");
+
+        // setting icon to dialog
+        //orderConfirm.setIcon(R.drawable.save);
+
+        // setting positive "Okay" button
+        orderDone.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user press Proceed button. Write logic here
+                goToViewOrderActivity();
+            }
+        });
+        orderDone.show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_set_a, menu);
+        getMenuInflater().inflate(R.menu.menu_item, menu);
         return true;
     }
 
@@ -184,8 +237,8 @@ public class SetAActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToOrderInfoCustomerActivity() {
-        Intent intent = new Intent(this, OrderInfoCustomerActivity.class);
+    public void goToViewOrderActivity() {
+        Intent intent = new Intent(this, ViewOrderActivity.class);
         startActivity(intent);
     }
 }

@@ -26,7 +26,7 @@ public class CustomerMainActivity extends ActionBarActivity {
         String message = "Welcome! " + name;
         AlertDialog.Builder builder = new AlertDialog.Builder(CustomerMainActivity.this);
         builder.setMessage(message)
-                .setNeutralButton("Okay", null)
+                .setPositiveButton("Okay", null)
                 .create()
                 .show();
 
@@ -46,7 +46,7 @@ public class CustomerMainActivity extends ActionBarActivity {
         manageOrderCustomerButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToManageOrderCustomerActivity();
+                        goToViewOrderActivity();
                     }
                 }
         );
@@ -56,7 +56,7 @@ public class CustomerMainActivity extends ActionBarActivity {
         trackWaitingTimeCustomerButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToTrackWaitingTimeCustomerButton();
+                        goToTrackWaitingTimeActivity();
                     }
                 }
         );
@@ -163,13 +163,13 @@ public class CustomerMainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void goToManageOrderCustomerActivity() {
-        Intent intent = new Intent(this, ManageOrderCustomerActivity.class);
+    public void goToViewOrderActivity() {
+        Intent intent = new Intent(this, ViewOrderActivity.class);
         startActivity(intent);
     }
 
-    public void goToTrackWaitingTimeCustomerButton() {
-        Intent intent = new Intent(this, TrackWaitingTimeCustomerActivity.class);
+    public void goToTrackWaitingTimeActivity() {
+        Intent intent = new Intent(this, TrackWaitingTimeActivity.class);
         startActivity(intent);
     }
 }

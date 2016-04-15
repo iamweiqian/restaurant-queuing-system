@@ -9,19 +9,19 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class OrderInfoCustomerActivity extends ActionBarActivity {
+public class ViewOrderActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_info_customer);
+        setContentView(R.layout.activity_view_order);
 
-        // customer order update button
-        Button orderUpdateCustomerButton = (Button) findViewById(R.id.orderUpdateCustomerButton);
-        orderUpdateCustomerButton.setOnClickListener(
+        // listed order update
+        Button listUpdateCustomerButton = (Button) findViewById(R.id.listUpdateCustomerButton);
+        listUpdateCustomerButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToOrderUpdateCustomerActivity();
+                        goToOrderInformationActivity();
                     }
                 }
         );
@@ -30,7 +30,7 @@ public class OrderInfoCustomerActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_order_info_customer, menu);
+        getMenuInflater().inflate(R.menu.menu_view_order, menu);
         return true;
     }
 
@@ -49,8 +49,8 @@ public class OrderInfoCustomerActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToOrderUpdateCustomerActivity() {
-        Intent intent = new Intent(this, OrderUpdateCustomerActivity.class);
+    public void goToOrderInformationActivity() {
+        Intent intent = new Intent(this, OrderInfomationActivity.class);
         startActivity(intent);
     }
 }

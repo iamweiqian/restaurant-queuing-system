@@ -4,7 +4,7 @@
     $username = $_POST["username"];
     $password = $_POST["password"];
     
-    $statement = mysqli_prepare($con, "SELECT * FROM User WHERE username = '$username' AND password = '$password'");
+    $statement = mysqli_prepare($con, "SELECT * FROM User WHERE username = ? AND password = ?");
     mysqli_stmt_bind_param($statement, "ss", $username, $password);
     mysqli_stmt_execute($statement);
     

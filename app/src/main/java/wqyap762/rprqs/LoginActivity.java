@@ -2,15 +2,14 @@ package wqyap762.rprqs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,7 +54,6 @@ public class LoginActivity extends Activity {
                             return;
                         } else {
                             loginButtonClicked(v);
-//                            goToCustomerMainActivity();
                         }
                     }
                 }
@@ -71,15 +69,13 @@ public class LoginActivity extends Activity {
         registerAccountLink.setOnClickListener(
                 new TextView.OnClickListener() {
                     public void onClick(View v) {
-                        goToRegisterAccountActivity();
+                        goToRegisterActivity();
                     }
                 }
         );
     }
 
-    public void loginButtonClicked(View v) {
-        usernameText = (EditText) findViewById(R.id.usernameText);
-        passwordText = (EditText) findViewById(R.id.passwordText);
+    public void loginButtonClicked(final View v) {
         final String username = usernameText.getText().toString();
         final String password = passwordText.getText().toString();
 
@@ -92,13 +88,11 @@ public class LoginActivity extends Activity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
+                        userDataSaved(v);
                         String name = jsonResponse.getString("name");
-                        String hpno = jsonResponse.getString("hpno");
 
                         Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
-                        intent.putExtra("username", username);
                         intent.putExtra("name", name);
-                        intent.putExtra("hpno", hpno);
 
                         LoginActivity.this.startActivity(intent);
                     } else {
@@ -122,6 +116,15 @@ public class LoginActivity extends Activity {
         /*String method = "login";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method, username, password);*/
+    }
+
+    public void userDataSaved(View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username", usernameText.getText().toString());
+        editor.commit();
+
+        Toast.makeText(this, "Data was saved successfully", Toast.LENGTH_LONG).show();
     }
 
     public boolean onKeyDown(int keycode, KeyEvent event) {
@@ -160,14 +163,8 @@ public class LoginActivity extends Activity {
         return super.onKeyDown(keycode, event);
     }
 
-    public void goToRegisterAccountActivity() {
-        Intent intent = new Intent(this, RegisterAccountActivity.class);
+    public void goToRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
-    public void goToCustomerMainActivity() {
-        Intent intent = new Intent(this, CustomerMainActivity.class);
-        startActivity(intent);
-    }
-
 }

@@ -23,7 +23,7 @@
             android:label="Log in" >
         </activity>
         <activity
-            android:name=".RegisterAccountActivity"
+            android:name=".RegisterActivity"
             android:label="@string/title_activity_register_account"
             android:parentActivityName=".LoginActivity" >
             <meta-data
@@ -119,7 +119,7 @@
                 android:value="wqyap762.rprqs.OrderInfoAdminActivity" />
         </activity>
         <activity
-            android:name=".SetAActivity"
+            android:name=".ItemActivity"
             android:label="@string/title_activity_set_a"
             android:parentActivityName=".SetOrderActivity" >
             <meta-data
@@ -127,7 +127,7 @@
                 android:value="wqyap762.rprqs.SetOrderActivity" />
         </activity>
         <activity
-            android:name=".ManageOrderCustomerActivity"
+            android:name=".ViewOrderActivity"
             android:label="@string/title_activity_manage_order_customer"
             android:parentActivityName=".CustomerMainActivity" >
             <meta-data
@@ -135,20 +135,20 @@
                 android:value="wqyap762.rprqs.CustomerMainActivity" />
         </activity>
         <activity
-            android:name=".OrderInfoCustomerActivity"
+            android:name=".OrderInfomationActivity"
             android:label="@string/title_activity_order_info_customer"
-            android:parentActivityName=".ManageOrderCustomerActivity" >
+            android:parentActivityName=".ViewOrderActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="wqyap762.rprqs.ManageOrderCustomerActivity" />
+                android:value=".ViewOrderActivity" />
         </activity>
         <activity
             android:name=".OrderUpdateCustomerActivity"
             android:label="@string/title_activity_order_update_customer"
-            android:parentActivityName=".OrderInfoCustomerActivity" >
+            android:parentActivityName=".OrderInfomationActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="wqyap762.rprqs.OrderInfoCustomerActivity" />
+                android:value=".OrderInfomationActivity" />
         </activity>
         <activity
             android:name=".TrackWaitingTimeAdminActivity"
@@ -167,7 +167,7 @@
                 android:value="wqyap762.rprqs.TrackWaitingTimeAdminActivity" />
         </activity>
         <activity
-            android:name=".TrackWaitingTimeCustomerActivity"
+            android:name=".TrackWaitingTimeActivity"
             android:label="@string/title_activity_track_waiting_time_customer"
             android:parentActivityName=".CustomerMainActivity" >
             <meta-data
@@ -177,10 +177,10 @@
         <activity
             android:name=".TrackOrderCustomerActivity"
             android:label="@string/title_activity_track_order_customer"
-            android:parentActivityName=".TrackWaitingTimeCustomerActivity" >
+            android:parentActivityName=".TrackWaitingTimeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="wqyap762.rprqs.TrackWaitingTimeCustomerActivity" />
+                android:value=".TrackWaitingTimeActivity" />
         </activity>
         <activity
             android:name=".ViewReportActivity"

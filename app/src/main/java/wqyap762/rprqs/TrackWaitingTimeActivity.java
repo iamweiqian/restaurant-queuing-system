@@ -9,28 +9,19 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class ManageOrderCustomerActivity extends ActionBarActivity {
+public class TrackWaitingTimeActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_order_customer);
+        setContentView(R.layout.activity_track_waiting_time);
 
-        // listed order update
-        Button listUpdateCustomerButton = (Button) findViewById(R.id.listUpdateCustomerButton);
-        listUpdateCustomerButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        goToOrderInfoCustomerActivity();
-                    }
-                }
-        );
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_manage_order_customer, menu);
+        getMenuInflater().inflate(R.menu.menu_track_waiting_time, menu);
         return true;
     }
 
@@ -47,10 +38,5 @@ public class ManageOrderCustomerActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void goToOrderInfoCustomerActivity() {
-        Intent intent = new Intent(this, OrderInfoCustomerActivity.class);
-        startActivity(intent);
     }
 }

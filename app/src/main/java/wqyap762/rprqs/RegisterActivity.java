@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +21,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 
-public class RegisterAccountActivity extends Activity {
+public class RegisterActivity extends Activity {
 
     EditText nameText, usernameText, passwordText, confirmPasswordText, hpnoText;
 
@@ -89,7 +86,7 @@ public class RegisterAccountActivity extends Activity {
                         // if all fields filled
                         if (!TextUtils.isEmpty(nameText.getText().toString()) && !TextUtils.isEmpty(usernameText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString())) {
                             if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString())/* && !usernameText.getText().toString().equals(uname)*/) {
-                                AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterAccountActivity.this);
+                                AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterActivity.this);
 
                                 // setting dialog title
                                 orderConfirm.setTitle("Confirm Register");
@@ -106,7 +103,6 @@ public class RegisterAccountActivity extends Activity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         // user press Proceed button. Write logic here
                                         registerButtonClicked(v);
-                                        registrationDone();
                                     }
                                 });
 
@@ -160,10 +156,9 @@ public class RegisterAccountActivity extends Activity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
-                        Intent intent = new Intent(RegisterAccountActivity.this, LoginActivity.class);
-                        RegisterAccountActivity.this.startActivity(intent);
+                        registrationDone();
                     } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterAccountActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                         builder.setMessage("Register Failed")
                                 .setNegativeButton("Retry", null)
                                 .create()
@@ -176,7 +171,7 @@ public class RegisterAccountActivity extends Activity {
         };
 
         RegisterRequest registerRequest = new RegisterRequest(username, password, name, hpno, Integer.parseInt(user_state), responseListener);
-        RequestQueue queue = Volley.newRequestQueue(RegisterAccountActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
         queue.add(registerRequest);
 
 //        String method = "register";
@@ -186,7 +181,7 @@ public class RegisterAccountActivity extends Activity {
     }
 
     public void registrationDone() {
-        AlertDialog.Builder registrationDone = new AlertDialog.Builder(RegisterAccountActivity.this);
+        AlertDialog.Builder registrationDone = new AlertDialog.Builder(RegisterActivity.this);
 
         // setting dialog title
         registrationDone.setTitle("Register Successfully!");

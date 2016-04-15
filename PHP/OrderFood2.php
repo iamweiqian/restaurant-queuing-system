@@ -6,8 +6,8 @@
 	$username = $_POST['username'];
 	$menu_id = $_POST['menu_id'];
 
-    $statement = mysqli_prepare($con, "INSERT INTO User (total_price, quantity, payment_status, username, menu_id) VALUES (?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($statement, "iisss", $total_price, $quantity, $payment_status, $username, $menu_id);
+    $statement = mysqli_prepare($con, "INSERT INTO `Order` (total_price, quantity, payment_status, username, menu_id) VALUES (?, ?, ?, ?, ?)") or die(mysqli_error($con));
+    mysqli_stmt_bind_param($statement, "disss", $total_price, $quantity, $payment_status, $username, $menu_id);
     mysqli_stmt_execute($statement);
     
     $response = array();

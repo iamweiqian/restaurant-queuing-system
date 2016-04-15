@@ -50,7 +50,9 @@ public class SetOrderActivity extends ActionBarActivity {
     }
 
     public void goToSetAActivity() {
-        Intent intent = new Intent(this, SetAActivity.class);
+        final String menu_id = "S001";
+        Intent intent = new Intent(this, ItemActivity.class);
+        intent.putExtra("menu_id", menu_id);
         startActivity(intent);
     }
 }
