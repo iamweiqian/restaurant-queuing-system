@@ -1,20 +1,29 @@
 package wqyap762.rprqs;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class ViewOrderActivity extends ActionBarActivity {
+
+    public static final String DEFAULT = "N/A";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", DEFAULT);
+        Toast.makeText(this, username, Toast.LENGTH_LONG).show();
 
         // listed order update
         Button listUpdateCustomerButton = (Button) findViewById(R.id.listUpdateCustomerButton);
@@ -50,7 +59,11 @@ public class ViewOrderActivity extends ActionBarActivity {
     }
 
     public void goToOrderInformationActivity() {
+        String order_id = "13";
+        String menu_id = "S001";
         Intent intent = new Intent(this, OrderInfomationActivity.class);
+        intent.putExtra("order_id", order_id);
+        intent.putExtra("menu_id", menu_id);
         startActivity(intent);
     }
 }

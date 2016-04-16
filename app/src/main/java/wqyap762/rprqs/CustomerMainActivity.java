@@ -41,9 +41,9 @@ public class CustomerMainActivity extends ActionBarActivity {
                 }
         );
 
-        // manage order customer button
-        Button manageOrderCustomerButton = (Button) findViewById(R.id.manageOrderCustomerButton);
-        manageOrderCustomerButton.setOnClickListener(
+        // view order customer button
+        Button viewOrderCustomerButton = (Button) findViewById(R.id.viewOrderCustomerButton);
+        viewOrderCustomerButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         goToViewOrderActivity();

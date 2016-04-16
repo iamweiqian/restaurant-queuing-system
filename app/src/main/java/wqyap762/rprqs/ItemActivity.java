@@ -123,7 +123,7 @@ public class ItemActivity extends ActionBarActivity {
             }
         };
 
-        MenuRequest menuRequest = new MenuRequest(menu_id, responseListener);
+        ItemRequest menuRequest = new ItemRequest(menu_id, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
         queue.add(menuRequest);
     }

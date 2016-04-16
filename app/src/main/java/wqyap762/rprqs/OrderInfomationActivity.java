@@ -1,5 +1,6 @@
 package wqyap762.rprqs;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,22 +12,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class OrderInfomationActivity extends ActionBarActivity {
 
     public static final String DEFAULT = "N/A";
-    TextView nameText, hpnoText, foodNameText, quantityText, totalPriceText, paymentStatusText;
+    TextView orderIdText, nameText, hpnoText, foodNameText, quantityText, totalPriceText, paymentStatusText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_infomation);
 
+        orderIdText = (TextView) findViewById(R.id.orderIdText);
         nameText = (TextView) findViewById(R.id.nameText);
         hpnoText = (TextView) findViewById(R.id.hpnoText);
         foodNameText = (TextView) findViewById(R.id.foodNameText);
         quantityText = (TextView) findViewById(R.id.quantityText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
+        paymentStatusText = (TextView) findViewById(R.id.paymentStatusText);
+
+        getOrderInformation();
 
         // customer order quit button
         Button orderDone = (Button) findViewById(R.id.orderDoneButton);
@@ -40,8 +53,50 @@ public class OrderInfomationActivity extends ActionBarActivity {
     }
 
     public void getOrderInformation() {
+        Intent intent = getIntent();
+        final String order_id = intent.getStringExtra("order_id");
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("UserData", DEFAULT);
+        String username = sharedPreferences.getString("username", DEFAULT);
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success) {
+                        String name = jsonResponse.getString("name");
+                        String hpno = jsonResponse.getString("hpno");
+                        String quantity = jsonResponse.getString("quantity");
+                        String total_price = jsonResponse.getString("total_price");
+                        String payment_status = jsonResponse.getString("payment_status");
+                        String food_name = jsonResponse.getString("food_name");
+
+                        orderIdText.setText(order_id);
+                        nameText.setText(name);
+                        hpnoText.setText(hpno);
+                        quantityText.setText(quantity);
+                        totalPriceText.setText(total_price);
+                        paymentStatusText.setText(payment_status);
+                        foodNameText.setText(food_name);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderInfomationActivity.this);
+                        builder.setMessage("Item Retrieve Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        OrderInformationRequest orderInformationRequest = new OrderInformationRequest(order_id, username, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(OrderInfomationActivity.this);
+        queue.add(orderInformationRequest);
     }
 
     @Override

@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by wqyap762 on 15/04/16.
+ * Created by wqyap762 on 16/04/16.
  */
-public class ViewOrderRequest extends StringRequest {
-    private static final String VIEW_ORDER_REQUEST_URL = "http://rprqs.16mb.com/ViewOrderRequest.php";
+public class OrderInformationRequest extends StringRequest {
+    private static final String ORDER_INFORMATION_REQUEST_URL = "http://rprqs.16mb.com/OrderInformationRequest.php";
     private Map<String, String> params;
 
-    public ViewOrderRequest(String order_id, String username, Response.Listener<String> listener) {
-        super(Request.Method.POST, VIEW_ORDER_REQUEST_URL, listener, null);
+    public OrderInformationRequest(String order_id, String username, Response.Listener<String> listener) {
+        super(Request.Method.POST, ORDER_INFORMATION_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("order_id", order_id);
         params.put("username", username);
