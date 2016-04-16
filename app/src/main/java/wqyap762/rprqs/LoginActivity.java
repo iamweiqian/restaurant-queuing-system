@@ -13,9 +13,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +28,7 @@ import org.json.JSONObject;
 public class LoginActivity extends Activity {
 
     EditText usernameText, passwordText;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class LoginActivity extends Activity {
 
         usernameText = (EditText) findViewById(R.id.usernameText);
         passwordText = (EditText) findViewById(R.id.passwordText);
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
 
         // sign in button
         Button signiInButton = (Button) findViewById(R.id.signInButton);
@@ -53,6 +56,7 @@ public class LoginActivity extends Activity {
                             passwordText.setError("Please enter password");
                             return;
                         } else {
+                            spinner.setVisibility(View.VISIBLE);
                             loginButtonClicked(v);
                         }
                     }

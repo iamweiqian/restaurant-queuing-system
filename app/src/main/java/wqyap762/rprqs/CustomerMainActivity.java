@@ -18,7 +18,7 @@ public class CustomerMainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String name = intent.getStringExtra("name");
         String hpno = intent.getStringExtra("hpno");
@@ -28,7 +28,7 @@ public class CustomerMainActivity extends ActionBarActivity {
         builder.setMessage(message)
                 .setPositiveButton("Okay", null)
                 .create()
-                .show();
+                .show();*/
 
 
         // order food button

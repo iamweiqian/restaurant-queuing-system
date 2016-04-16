@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -25,11 +26,15 @@ public class OrderInfomationActivity extends ActionBarActivity {
 
     public static final String DEFAULT = "N/A";
     TextView orderIdText, nameText, hpnoText, foodNameText, quantityText, totalPriceText, paymentStatusText;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_infomation);
+
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
 
         orderIdText = (TextView) findViewById(R.id.orderIdText);
         nameText = (TextView) findViewById(R.id.nameText);
@@ -46,6 +51,7 @@ public class OrderInfomationActivity extends ActionBarActivity {
         orderDone.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        spinner.setVisibility(View.VISIBLE);
                         goToViewOrderActivity();
                     }
                 }
@@ -81,6 +87,8 @@ public class OrderInfomationActivity extends ActionBarActivity {
                         totalPriceText.setText(total_price);
                         paymentStatusText.setText(payment_status);
                         foodNameText.setText(food_name);
+
+                        spinner.setVisibility(View.GONE);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(OrderInfomationActivity.this);
                         builder.setMessage("Item Retrieve Failed")

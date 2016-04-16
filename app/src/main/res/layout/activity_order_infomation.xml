@@ -207,4 +207,13 @@
                 android:layout_column="1" />
         </TableRow>
     </TableLayout>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:layout_centerInParent="true"/>
+
 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -29,20 +30,25 @@ public class ItemActivity extends ActionBarActivity {
 
     public static final String DEFAULT = "N/A";
     TextView foodNameText, descriptionText, basicPriceText, totalPriceText;
-    EditText setAQuantityText;
+    EditText quantityText;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
+
         foodNameText = (TextView) findViewById(R.id.foodNameText);
         descriptionText = (TextView) findViewById(R.id.descriptionText);
         basicPriceText = (TextView) findViewById(R.id.basicPriceText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
-        setAQuantityText = (EditText) findViewById(R.id.setAQuantityText);
+        quantityText = (EditText) findViewById(R.id.quantityText);
 
         getMenu();
+
         totalPriceCalculated();
 
         // customer order
@@ -50,8 +56,8 @@ public class ItemActivity extends ActionBarActivity {
         orderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(final View v) {
-                        if (TextUtils.isEmpty(setAQuantityText.getText().toString())) {
-                            setAQuantityText.setError("Please enter quantity.");
+                        if (TextUtils.isEmpty(quantityText.getText().toString())) {
+                            quantityText.setError("Please enter quantity.");
                             return;
                         } else {
                             final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(ItemActivity.this);
@@ -70,7 +76,8 @@ public class ItemActivity extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // user press Proceed button. Write logic here
-                                    setAButtonClicked(v);
+                                    spinner.setVisibility(View.VISIBLE);
+                                    orderButtonClicked(v);
                                 }
                             });
 
@@ -110,6 +117,8 @@ public class ItemActivity extends ActionBarActivity {
                         foodNameText.setText(food_name);
                         descriptionText.setText(description);
                         basicPriceText.setText(basic_price);
+
+                        spinner.setVisibility(View.GONE);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
                         builder.setMessage("Item Retrieve Failed")
@@ -129,7 +138,7 @@ public class ItemActivity extends ActionBarActivity {
     }
 
     public void totalPriceCalculated() {
-        setAQuantityText.addTextChangedListener(new TextWatcher() {
+        quantityText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -137,12 +146,12 @@ public class ItemActivity extends ActionBarActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtils.isEmpty(setAQuantityText.getText().toString())) {
+                if (!TextUtils.isEmpty(quantityText.getText().toString())) {
                     Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
-                    Double quantity = Double.parseDouble(setAQuantityText.getText().toString());
+                    Double quantity = Double.parseDouble(quantityText.getText().toString());
                     totalPriceText.setText(String.valueOf(basicPrice * quantity));
                 } else {
-                    setAQuantityText.setError("Please enter quantity.");
+                    quantityText.setError("Please enter quantity.");
                     return;
                 }
 
@@ -155,11 +164,11 @@ public class ItemActivity extends ActionBarActivity {
         });
     }
 
-    public void setAButtonClicked (View v) {
+    public void orderButtonClicked (View v) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         final Double total_price = Double.parseDouble(totalPriceText.getText().toString());
-        final int quantity = Integer.parseInt(setAQuantityText.getText().toString());
+        final int quantity = Integer.parseInt(quantityText.getText().toString());
         final String payment_status = "Unpaid";
         final String username = sharedPreferences.getString("username", DEFAULT);
         final String menu_id = intent.getStringExtra("menu_id");
