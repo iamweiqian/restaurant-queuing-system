@@ -17,14 +17,14 @@
             android:layout_width="350dp"
             android:layout_height="70dp"
             android:text="Ice Lemon Tea"
-            android:id="@+id/button19"
+            android:id="@+id/iceLemonTeaButton"
             android:layout_row="0"
             android:layout_column="0" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:id="@+id/button20"
+            android:id="@+id/greenTeaButton"
             android:layout_row="1"
             android:layout_column="0"
             android:text="Green Tea" />
@@ -33,14 +33,14 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="100 PLUS"
-            android:id="@+id/button21"
+            android:id="@+id/hundredPlusButton"
             android:layout_row="2"
             android:layout_column="0" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:id="@+id/button22"
+            android:id="@+id/cocaColaButton"
             android:layout_row="3"
             android:layout_column="0"
             android:text="Coca-Cola" />
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="Chinese Tea"
-            android:id="@+id/button23"
+            android:id="@+id/chineseTeaButton"
             android:layout_row="4"
             android:layout_column="0" />
 
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="Sky Juice"
-            android:id="@+id/button24"
+            android:id="@+id/skyJuiceButton"
             android:layout_row="5"
             android:layout_column="0" />
     </GridLayout>

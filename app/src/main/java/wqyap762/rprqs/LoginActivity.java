@@ -123,8 +123,6 @@ public class LoginActivity extends Activity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", usernameText.getText().toString());
         editor.commit();
-
-        Toast.makeText(this, "Data was saved successfully", Toast.LENGTH_LONG).show();
     }
 
     public boolean onKeyDown(int keycode, KeyEvent event) {

@@ -1,17 +1,88 @@
 package wqyap762.rprqs;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class RiceOrderActivity extends ActionBarActivity {
+
+    String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rice_order);
+
+        // curry chicken rice
+        Button curryChickenRiceButton = (Button) findViewById(R.id.curryChickenRiceButton);
+        curryChickenRiceButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "R001";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // sambal chicken ricew
+        Button sambalChickenRiceButton = (Button) findViewById(R.id.sambalChickenRiceButton);
+        sambalChickenRiceButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "R002";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // sweet sour pork rice
+        Button sweetSourPorkRiceButton = (Button) findViewById(R.id.sweetSourPorkRiceButton);
+        sweetSourPorkRiceButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "R003";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // braised pork rice
+        Button braisedPorkRiceButton = (Button) findViewById(R.id.braisedPorkRiceButton);
+        braisedPorkRiceButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "R004";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // dried chilis chicken rice
+        Button driedChiliesChickenRiceButton = (Button) findViewById(R.id.driedChiliesChickenRiceButton);
+        driedChiliesChickenRiceButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "R005";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // ginger and onion chicken rice
+        Button gingerOnionChickenRiceButton = (Button) findViewById(R.id.gingerOnionChickenRiceButton);
+        gingerOnionChickenRiceButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "R006";
+                        goToItemActivity();
+                    }
+                }
+        );
     }
 
     @Override
@@ -34,5 +105,11 @@ public class RiceOrderActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToItemActivity() {
+        Intent intent = new Intent(this, ItemActivity.class);
+        intent.putExtra("menu_id", menu_id);
+        startActivity(intent);
     }
 }

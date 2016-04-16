@@ -11,6 +11,8 @@ import android.widget.Button;
 
 public class SetOrderActivity extends ActionBarActivity {
 
+    String menu_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,63 @@ public class SetOrderActivity extends ActionBarActivity {
         setAButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToSetAActivity();
+                        menu_id = "S001";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // set B
+        Button setBButton = (Button) findViewById(R.id.setBButton);
+        setBButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "S002";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // set C
+        Button setCButton = (Button) findViewById(R.id.setCButton);
+        setCButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "S003";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // set D
+        Button setDButton = (Button) findViewById(R.id.setDButton);
+        setDButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "S004";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // set E
+        Button setEButton = (Button) findViewById(R.id.setEButton);
+        setEButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "S005";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // set F
+        Button setFButton = (Button) findViewById(R.id.setFButton);
+        setFButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "S006";
+                        goToItemActivity();
                     }
                 }
         );
@@ -49,8 +107,7 @@ public class SetOrderActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToSetAActivity() {
-        final String menu_id = "S001";
+    public void goToItemActivity() {
         Intent intent = new Intent(this, ItemActivity.class);
         intent.putExtra("menu_id", menu_id);
         startActivity(intent);

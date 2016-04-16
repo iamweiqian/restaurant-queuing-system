@@ -46,8 +46,8 @@ public class ItemActivity extends ActionBarActivity {
         totalPriceCalculated();
 
         // customer order
-        Button setAOrderButton = (Button) findViewById(R.id.setAOrderButton);
-        setAOrderButton.setOnClickListener(
+        Button orderButton = (Button) findViewById(R.id.orderButton);
+        orderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(final View v) {
                         if (TextUtils.isEmpty(setAQuantityText.getText().toString())) {

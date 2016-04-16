@@ -14,11 +14,11 @@ public class ViewOrderRequest extends StringRequest {
     private static final String VIEW_ORDER_REQUEST_URL = "http://rprqs.16mb.com/ViewOrderRequest.php";
     private Map<String, String> params;
 
-    public ViewOrderRequest(String order_id, String username, Response.Listener<String> listener) {
+    public ViewOrderRequest(String username, String order_id, Response.Listener<String> listener) {
         super(Request.Method.POST, VIEW_ORDER_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("order_id", order_id);
         params.put("username", username);
+        params.put("order_id", order_id);
     }
 
     @Override

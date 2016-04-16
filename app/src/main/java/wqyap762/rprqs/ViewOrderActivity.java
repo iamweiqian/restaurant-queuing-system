@@ -21,10 +21,6 @@ public class ViewOrderActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", DEFAULT);
-        Toast.makeText(this, username, Toast.LENGTH_LONG).show();
-
         // listed order update
         Button listUpdateCustomerButton = (Button) findViewById(R.id.listUpdateCustomerButton);
         listUpdateCustomerButton.setOnClickListener(
