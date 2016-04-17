@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 
 public class RegisterActivity extends Activity {
 
-    EditText nameText, usernameText, passwordText, confirmPasswordText, hpnoText;
+    EditText hpnoText, nameText, usernameText, passwordText, confirmPasswordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,9 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.activity_register_account);
 
         nameText = (EditText) findViewById(R.id.nameText);
-        usernameText = (EditText) findViewById(R.id.usernameText);
+        hpnoText = (EditText) findViewById(R.id.hpnoText);
         passwordText = (EditText) findViewById(R.id.passwordText);
         confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
-        hpnoText = (EditText) findViewById(R.id.hpnoText);
 
         // register account button
         final Button registerAccountButton = (Button) findViewById(R.id.registerAccountButton);
@@ -42,15 +41,11 @@ public class RegisterActivity extends Activity {
                 new Button.OnClickListener() {
                     public void onClick(final View v) {
                         // check empty fields
-                        // String uname = dbHandler.searchUsername(usernameText.getText().toString());
-                        /*if (usernameText.getText().toString().equals(uname)) {
-                            usernameText.setError("This username is unavailable.");
-                            return;
-                        } else*/ if (TextUtils.isEmpty(nameText.getText().toString())) {
+                        if (TextUtils.isEmpty(nameText.getText().toString())) {
                             nameText.setError("Please enter your full name.");
                             return;
-                        } else if (TextUtils.isEmpty(usernameText.getText().toString())) {
-                            usernameText.setError("Please enter username.");
+                        } else if (TextUtils.isEmpty(hpnoText.getText().toString())) {
+                            hpnoText.setError("Please enter your phone number.");
                             return;
                         } else if (TextUtils.isEmpty(passwordText.getText().toString())) {
                             passwordText.setError("Please enter password.");
@@ -58,14 +53,11 @@ public class RegisterActivity extends Activity {
                         } else if (TextUtils.isEmpty(confirmPasswordText.getText().toString())) {
                             confirmPasswordText.setError("Please confirm your password.");
                             return;
-                        } else if (TextUtils.isEmpty(hpnoText.getText().toString())) {
-                            hpnoText.setError("Please enter your phone number.");
-                            return;
                         }
 
-                        // username < 8 char
-                        if (usernameText.getText().toString().length() > 0 && usernameText.getText().toString().length() < 8) {
-                            usernameText.setError("Username must be at least 8 characters!");
+                        // phone number should be in format
+                        if (hpnoText.getText().toString().length() < 10) {
+                            hpnoText.setError("Phone number must be at least 10 number!");
                             return;
                         }
 
@@ -77,15 +69,9 @@ public class RegisterActivity extends Activity {
                             return;
                         }
 
-                        // phone number should be in format
-                        if (hpnoText.getText().toString().length() < 10) {
-                            hpnoText.setError("Phone number must be at least 10 number!");
-                            return;
-                        }
-
                         // if all fields filled
-                        if (!TextUtils.isEmpty(nameText.getText().toString()) && !TextUtils.isEmpty(usernameText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString())) {
-                            if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString())/* && !usernameText.getText().toString().equals(uname)*/) {
+                        if (!TextUtils.isEmpty(nameText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString())) {
+                            if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString())) {
                                 AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterActivity.this);
 
                                 // setting dialog title
@@ -141,10 +127,9 @@ public class RegisterActivity extends Activity {
     }
 
     public void registerButtonClicked(View v) {
-        final String username = usernameText.getText().toString();
+        final String hpno = hpnoText.getText().toString();
         final String password = passwordText.getText().toString();
         final String name = nameText.getText().toString();
-        final String hpno = hpnoText.getText().toString();
         final String user_state = "2";
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -170,14 +155,9 @@ public class RegisterActivity extends Activity {
             }
         };
 
-        RegisterRequest registerRequest = new RegisterRequest(username, password, name, hpno, Integer.parseInt(user_state), responseListener);
+        RegisterRequest registerRequest = new RegisterRequest(hpno, password, name, Integer.parseInt(user_state), responseListener);
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
         queue.add(registerRequest);
-
-//        String method = "register";
-//        BackgroundTask backgroundTask = new BackgroundTask(this);
-//        backgroundTask.execute(method, username, password, name, hpno, user_state);
-//        finish();
     }
 
     public void registrationDone() {

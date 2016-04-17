@@ -66,7 +66,7 @@ public class OrderInfomationActivity extends ActionBarActivity {
         Intent intent = getIntent();
         final String order_id = intent.getStringExtra("order_id");
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", DEFAULT);
+        final String hpno = sharedPreferences.getString("hpno", DEFAULT);
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
 
@@ -78,7 +78,6 @@ public class OrderInfomationActivity extends ActionBarActivity {
 
                     if (success) {
                         String name = jsonResponse.getString("name");
-                        String hpno = jsonResponse.getString("hpno");
                         String food_name = jsonResponse.getString("food_name");
                         String quantity = jsonResponse.getString("quantity");
                         String total_price = jsonResponse.getString("total_price");
@@ -112,7 +111,7 @@ public class OrderInfomationActivity extends ActionBarActivity {
             }
         };
 
-        OrderInformationRequest orderInformationRequest = new OrderInformationRequest(order_id, username, responseListener);
+        OrderInformationRequest orderInformationRequest = new OrderInformationRequest(order_id, hpno, responseListener);
         RequestQueue queue = Volley.newRequestQueue(OrderInfomationActivity.this);
         queue.add(orderInformationRequest);
     }

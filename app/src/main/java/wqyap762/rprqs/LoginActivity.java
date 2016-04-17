@@ -27,7 +27,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends Activity {
 
-    EditText usernameText, passwordText;
+    EditText hpnoText, passwordText;
     private ProgressBar spinner;
 
     @Override
@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usernameText = (EditText) findViewById(R.id.usernameText);
+        hpnoText = (EditText) findViewById(R.id.hpnoText);
         passwordText = (EditText) findViewById(R.id.passwordText);
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
@@ -45,14 +45,14 @@ public class LoginActivity extends Activity {
         signiInButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        if (TextUtils.isEmpty(usernameText.getText().toString())) {
-                            usernameText.setError("Please enter username");
+                        if (TextUtils.isEmpty(hpnoText.getText().toString())) {
+                            hpnoText.setError("Please enter username");
                             return;
                         } else if (TextUtils.isEmpty(passwordText.getText().toString())) {
                             passwordText.setError("Please enter password");
                             return;
-                        } else if (TextUtils.isEmpty(usernameText.getText().toString()) && TextUtils.isEmpty(passwordText.getText().toString())) {
-                            usernameText.setError("Please enter username");
+                        } else if (TextUtils.isEmpty(hpnoText.getText().toString()) && TextUtils.isEmpty(passwordText.getText().toString())) {
+                            hpnoText.setError("Please enter username");
                             passwordText.setError("Please enter password");
                             return;
                         } else {
@@ -80,7 +80,7 @@ public class LoginActivity extends Activity {
     }
 
     public void loginButtonClicked(final View v) {
-        final String username = usernameText.getText().toString();
+        final String hpno = hpnoText.getText().toString();
         final String password = passwordText.getText().toString();
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -113,19 +113,15 @@ public class LoginActivity extends Activity {
         };
 
 
-        LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
+        LoginRequest loginRequest = new LoginRequest(hpno, password, responseListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(loginRequest);
-
-        /*String method = "login";
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method, username, password);*/
     }
 
     public void userDataSaved(View v) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("username", usernameText.getText().toString());
+        editor.putString("hpno", hpnoText.getText().toString());
         editor.commit();
     }
 

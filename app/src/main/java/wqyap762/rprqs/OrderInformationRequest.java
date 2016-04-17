@@ -14,11 +14,11 @@ public class OrderInformationRequest extends StringRequest {
     private static final String ORDER_INFORMATION_REQUEST_URL = "http://rprqs.16mb.com/OrderInformationRequest.php";
     private Map<String, String> params;
 
-    public OrderInformationRequest(String order_id, String username, Response.Listener<String> listener) {
+    public OrderInformationRequest(String order_id, String hpno, Response.Listener<String> listener) {
         super(Request.Method.POST, ORDER_INFORMATION_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("order_id", order_id);
-        params.put("username", username);
+        params.put("hpno", hpno + "");
     }
 
     @Override

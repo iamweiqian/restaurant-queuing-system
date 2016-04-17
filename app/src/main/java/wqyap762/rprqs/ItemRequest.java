@@ -17,7 +17,7 @@ public class ItemRequest extends StringRequest {
     public ItemRequest(String menu_id, Response.Listener<String> listener) {
         super(Request.Method.POST, ITEM_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("menu_id", menu_id);
+        params.put("menu_id", menu_id + "");
     }
 
     @Override

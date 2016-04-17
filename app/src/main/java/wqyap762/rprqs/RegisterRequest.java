@@ -13,13 +13,12 @@ public class RegisterRequest extends StringRequest {
     private static final String REGISTER_REQUEST_URL = "http://rprqs.16mb.com/RegisterRequest.php";
     private Map<String, String> params;
 
-    public RegisterRequest(String username, String password, String name, String hpno, int user_state, Response.Listener<String> listener) {
+    public RegisterRequest(String hpno, String password, String name, int user_state, Response.Listener<String> listener) {
         super(Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("username", username);
+        params.put("hpno", hpno);
         params.put("password", password);
         params.put("name", name);
-        params.put("hpno", hpno);
         params.put("user_state", user_state + "");
     }
 

@@ -206,7 +206,7 @@ public class ItemActivity extends ActionBarActivity {
         final Double total_price = Double.parseDouble(totalPriceText.getText().toString());
         final int quantity = Integer.parseInt(quantityText.getText().toString());
         final String payment_status = "Unpaid";
-        final String username = sharedPreferences.getString("username", DEFAULT);
+        final String hpno = sharedPreferences.getString("hpno", DEFAULT);
         final String menu_id = intent.getStringExtra("menu_id");
         final Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -236,7 +236,7 @@ public class ItemActivity extends ActionBarActivity {
             }
         };
 
-        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, username, menu_id, ordered_on, responseListener);
+        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, hpno, menu_id, ordered_on, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
         queue.add(orderRequest);
     }
