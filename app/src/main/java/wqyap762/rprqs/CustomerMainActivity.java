@@ -1,7 +1,9 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -98,6 +100,11 @@ public class CustomerMainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // user press Proceed button. Write logic here
+                    SharedPreferences sharedPreferences =getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    finish();
                     goToLoginActivity();
                 }
             });
