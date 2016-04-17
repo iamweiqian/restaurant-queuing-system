@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,14 +29,16 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
 public class ItemActivity extends ActionBarActivity {
 
     public static final String DEFAULT = "N/A";
+    ImageView itemImage;
     TextView foodNameText, descriptionText, basicPriceText, totalPriceText;
     EditText quantityText;
     private ProgressBar spinner;
@@ -45,12 +51,14 @@ public class ItemActivity extends ActionBarActivity {
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
 
+        itemImage = (ImageView) findViewById(R.id.itemImage);
         foodNameText = (TextView) findViewById(R.id.foodNameText);
         descriptionText = (TextView) findViewById(R.id.descriptionText);
         basicPriceText = (TextView) findViewById(R.id.basicPriceText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
         quantityText = (EditText) findViewById(R.id.quantityText);
 
+        new downloadImage().execute();
         getMenu();
 
         totalPriceCalculated();
@@ -101,6 +109,33 @@ public class ItemActivity extends ActionBarActivity {
         );
     }
 
+    public class downloadImage extends AsyncTask<Void, Void, Bitmap> {
+        Intent intent = getIntent();
+        String menu_id = intent.getStringExtra("menu_id");
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            try {
+                URL imageURL = new URL("http://rprqs.16mb.com/image/" + menu_id + ".png");
+                Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+                return bitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            if (bitmap != null) {
+                itemImage.setImageBitmap(bitmap);
+
+                spinner.setVisibility(View.GONE);
+            }
+        }
+    }
+
     public void getMenu() {
         Intent intent = getIntent();
         String menu_id = intent.getStringExtra("menu_id");
@@ -121,8 +156,6 @@ public class ItemActivity extends ActionBarActivity {
                         foodNameText.setText(food_name);
                         descriptionText.setText(description);
                         basicPriceText.setText(basic_price);
-
-                        spinner.setVisibility(View.GONE);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
                         builder.setMessage("Item Retrieve Failed")
@@ -158,7 +191,6 @@ public class ItemActivity extends ActionBarActivity {
                     quantityText.setError("Please enter quantity.");
                     return;
                 }
-
             }
 
             @Override
