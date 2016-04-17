@@ -21,11 +21,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.StringTokenizer;
+
 
 public class OrderInfomationActivity extends ActionBarActivity {
 
     public static final String DEFAULT = "N/A";
-    TextView orderIdText, nameText, hpnoText, foodNameText, quantityText, totalPriceText, paymentStatusText;
+    TextView orderIdText, nameText, hpnoText, foodNameText, quantityText, totalPriceText, orderDateText, orderTimeText, paymentStatusText;
     private ProgressBar spinner;
 
     @Override
@@ -42,6 +44,8 @@ public class OrderInfomationActivity extends ActionBarActivity {
         foodNameText = (TextView) findViewById(R.id.foodNameText);
         quantityText = (TextView) findViewById(R.id.quantityText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
+        orderDateText = (TextView) findViewById(R.id.orderDateText);
+        orderTimeText = (TextView) findViewById(R.id.orderTimeText);
         paymentStatusText = (TextView) findViewById(R.id.paymentStatusText);
 
         getOrderInformation();
@@ -75,18 +79,24 @@ public class OrderInfomationActivity extends ActionBarActivity {
                     if (success) {
                         String name = jsonResponse.getString("name");
                         String hpno = jsonResponse.getString("hpno");
+                        String food_name = jsonResponse.getString("food_name");
                         String quantity = jsonResponse.getString("quantity");
                         String total_price = jsonResponse.getString("total_price");
+                        String ordered_on = jsonResponse.getString("ordered_on");
+                        StringTokenizer tokenizer = new StringTokenizer(ordered_on);
+                        String ordered_date = tokenizer.nextToken();
+                        String ordered_time = tokenizer.nextToken();
                         String payment_status = jsonResponse.getString("payment_status");
-                        String food_name = jsonResponse.getString("food_name");
 
                         orderIdText.setText(order_id);
                         nameText.setText(name);
                         hpnoText.setText(hpno);
+                        foodNameText.setText(food_name);
                         quantityText.setText(quantity);
                         totalPriceText.setText(total_price);
+                        orderDateText.setText(ordered_date);
+                        orderTimeText.setText(ordered_time);
                         paymentStatusText.setText(payment_status);
-                        foodNameText.setText(food_name);
 
                         spinner.setVisibility(View.GONE);
                     } else {

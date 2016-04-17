@@ -55,11 +55,9 @@ public class ViewOrderActivity extends ActionBarActivity {
     }
 
     public void goToOrderInformationActivity() {
-        String order_id = "13";
-        String menu_id = "S001";
+        String order_id = "18";
         Intent intent = new Intent(this, OrderInfomationActivity.class);
         intent.putExtra("order_id", order_id);
-        intent.putExtra("menu_id", menu_id);
         startActivity(intent);
     }
 }

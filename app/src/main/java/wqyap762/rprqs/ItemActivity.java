@@ -25,6 +25,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class ItemActivity extends ActionBarActivity {
 
@@ -172,6 +176,10 @@ public class ItemActivity extends ActionBarActivity {
         final String payment_status = "Unpaid";
         final String username = sharedPreferences.getString("username", DEFAULT);
         final String menu_id = intent.getStringExtra("menu_id");
+        final Date now = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String ordered_on = simpleDateFormat.format(now);
+
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
 
@@ -196,7 +204,7 @@ public class ItemActivity extends ActionBarActivity {
             }
         };
 
-        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, username, menu_id, responseListener);
+        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, username, menu_id, ordered_on, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
         queue.add(orderRequest);
     }
