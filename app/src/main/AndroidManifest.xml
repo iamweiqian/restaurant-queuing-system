@@ -75,16 +75,16 @@
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
         </activity>
         <activity
-            android:name=".HomemadeDessertsOrderActivity"
-            android:label="@string/title_activity_homemade_desserts_order"
+            android:name=".DessertsOrderActivity"
+            android:label="Desserts"
             android:parentActivityName=".OrderFoodActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
         </activity>
         <activity
-            android:name=".HomemadeBeveragesOrderActivity"
-            android:label="@string/title_activity_homemade_beverages_order"
+            android:name=".FruitJuiceOrderActivity"
+            android:label="Fruit Juice"
             android:parentActivityName=".OrderFoodActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

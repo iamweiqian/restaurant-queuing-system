@@ -18,9 +18,9 @@ public class NoodlesOrderActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noodles_order);
 
-        // wa tan ho
-        Button waTanHoButton = (Button) findViewById(R.id.waTanHoButton);
-        waTanHoButton.setOnClickListener(
+        // Dumpling Noodles
+        Button dumplingNoodlesButton = (Button) findViewById(R.id.dumplingNoodlesButton);
+        dumplingNoodlesButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "N001";
@@ -29,9 +29,9 @@ public class NoodlesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // singapore fried bee hoon
-        Button singaporeFriedBeeHoonButton = (Button) findViewById(R.id.singaporeFriedBeeHoonButton);
-        singaporeFriedBeeHoonButton.setOnClickListener(
+        // Wanton Noodles
+        Button wanTonNoodlesButton = (Button) findViewById(R.id.wanTonNoodlesButton);
+        wanTonNoodlesButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "N002";
@@ -40,9 +40,9 @@ public class NoodlesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // hokkien mee
-        Button hokkienMeeButton = (Button) findViewById(R.id.hokkienMeeButton);
-        hokkienMeeButton.setOnClickListener(
+        // Fried Fish Bee Hoon Soup
+        Button friedFishBeeHoonSoupButton = (Button) findViewById(R.id.friedFishBeeHoonSoupButton);
+        friedFishBeeHoonSoupButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "N003";
@@ -51,9 +51,9 @@ public class NoodlesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // singapore fried hokkien mee
-        Button singaporeFriedHokkienMeeButton = (Button) findViewById(R.id.singaporeFriedHokkienMeeButton);
-        singaporeFriedHokkienMeeButton.setOnClickListener(
+        // Sliced Fish Bee Hoon Soup
+        Button slicedFishBeeHoonSoupButton = (Button) findViewById(R.id.slicedFishBeeHoonSoupButton);
+        slicedFishBeeHoonSoupButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "N004";
@@ -62,9 +62,9 @@ public class NoodlesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // yee mee
-        Button claypotYeeMeeButton = (Button) findViewById(R.id.claypotYeeMeeButton);
-        claypotYeeMeeButton.setOnClickListener(
+        // Sin Chew Bee Hoon
+        Button sinChewBeeHoonButton = (Button) findViewById(R.id.sinChewBeeHoonButton);
+        sinChewBeeHoonButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "N005";
@@ -73,9 +73,9 @@ public class NoodlesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // tomato mee
-        Button tomatoMeeButton = (Button) findViewById(R.id.tomatoMeeButton);
-        tomatoMeeButton.setOnClickListener(
+        // Ee Mee
+        Button eeMeeButton = (Button) findViewById(R.id.eeMeeButton);
+        eeMeeButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "N006";

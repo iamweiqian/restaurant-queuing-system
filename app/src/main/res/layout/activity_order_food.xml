@@ -48,16 +48,16 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="Homemade Desserts"
-            android:id="@+id/homemadeDessertsOrderButton"
+            android:text="Fruit Juice"
+            android:id="@+id/fruitJuiceOrderButton"
             android:layout_row="4"
             android:layout_column="0" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="Homemade Beverages"
-            android:id="@+id/homemadeBeveragesOrderButton"
+            android:text="Desserts"
+            android:id="@+id/dessertsOrderButton"
             android:layout_row="5"
             android:layout_column="0" />
     </GridLayout>

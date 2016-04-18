@@ -9,65 +9,65 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class HomemadeBeveragesOrderActivity extends ActionBarActivity {
+public class FruitJuiceOrderActivity extends ActionBarActivity {
 
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homemade_beverages_order);
+        setContentView(R.layout.activity_fruit_juice_order);
 
-        // barley
-        Button barleyButton = (Button) findViewById(R.id.barleyButton);
-        barleyButton.setOnClickListener(
+        // Apple Bittergourd Juice
+        Button applebittergourdJuiceButton = (Button) findViewById(R.id.applebittergourdJuiceButton);
+        applebittergourdJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HB001";
+                        menu_id = "J001";
                         goToItemActivity();
                     }
                 }
         );
 
-        // herbal tea
-        Button herbalTeaButton = (Button) findViewById(R.id.herbalTeaButton);
-        herbalTeaButton.setOnClickListener(
+        // Apple Carrot Juice
+        Button appleCarrotJuiceButton = (Button) findViewById(R.id.appleCarrotJuiceButton);
+        appleCarrotJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HB002";
+                        menu_id = "J002";
                         goToItemActivity();
                     }
                 }
         );
 
-        // chrysanthemum tea
-        Button chrysanthemumTeaButton = (Button) findViewById(R.id.chrysanthemumTeaButton);
-        chrysanthemumTeaButton.setOnClickListener(
+        // Green Apple Celery Juice
+        Button greenAppleCeleryJuiceButton = (Button) findViewById(R.id.greenAppleCeleryJuiceButton);
+        greenAppleCeleryJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HB003";
+                        menu_id = "J003";
                         goToItemActivity();
                     }
                 }
         );
 
-        // soy bean
-        Button soyBeanButton = (Button) findViewById(R.id.soyBeanButton);
-        soyBeanButton.setOnClickListener(
+        // Guava and Sour Plum Juice
+        Button guavaSourPlumJuice = (Button) findViewById(R.id.guavaSourPlumJuice);
+        guavaSourPlumJuice.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HB004";
+                        menu_id = "J004";
                         goToItemActivity();
                     }
                 }
         );
 
-        // sour plum lime juice
-        Button sourPlumLimeJuiceButton = (Button) findViewById(R.id.sourPlumLimeJuiceButton);
-        sourPlumLimeJuiceButton.setOnClickListener(
+        // Watermelon Orange Juice
+        Button watermelonOrangeJuiceButton = (Button) findViewById(R.id.watermelonOrangeJuiceButton);
+        watermelonOrangeJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HB005";
+                        menu_id = "J005";
                         goToItemActivity();
                     }
                 }
@@ -77,7 +77,7 @@ public class HomemadeBeveragesOrderActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_homemade_beverages_order, menu);
+        getMenuInflater().inflate(R.menu.menu_fruit_juice_order, menu);
         return true;
     }
 

@@ -57,21 +57,21 @@ public class OrderFoodActivity extends ActionBarActivity {
         );
 
         // homemade desserts
-        Button homemadedessertsOrderButton = (Button) findViewById(R.id.homemadeDessertsOrderButton);
-        homemadedessertsOrderButton.setOnClickListener(
+        Button fruitJuiceOrderButton = (Button) findViewById(R.id.fruitJuiceOrderButton);
+        fruitJuiceOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToHomemadeDessertsOrderActivity();
+                        goToFruitJuiceOrderActivity();
                     }
                 }
         );
 
         // homemade beverages
-        Button homemadebeveragesOrderButton = (Button) findViewById(R.id.homemadeBeveragesOrderButton);
-        homemadebeveragesOrderButton.setOnClickListener(
+        Button dessertsOrderButton = (Button) findViewById(R.id.dessertsOrderButton);
+        dessertsOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToHomemadeBeveragesOrderActivity();
+                        goToDessertsOrderActivity();
                     }
                 }
         );
@@ -119,13 +119,13 @@ public class OrderFoodActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void goToHomemadeDessertsOrderActivity() {
-        Intent intent = new Intent(this, HomemadeDessertsOrderActivity.class);
+    public void goToFruitJuiceOrderActivity() {
+        Intent intent = new Intent(this, FruitJuiceOrderActivity.class);
         startActivity(intent);
     }
 
-    public void goToHomemadeBeveragesOrderActivity() {
-        Intent intent = new Intent(this, HomemadeBeveragesOrderActivity.class);
+    public void goToDessertsOrderActivity() {
+        Intent intent = new Intent(this, DessertsOrderActivity.class);
         startActivity(intent);
     }
 }

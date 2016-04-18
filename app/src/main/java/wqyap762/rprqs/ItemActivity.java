@@ -116,7 +116,7 @@ public class ItemActivity extends ActionBarActivity {
         @Override
         protected Bitmap doInBackground(Void... params) {
             try {
-                URL imageURL = new URL("http://rprqs.16mb.com/image/" + menu_id + ".png");
+                URL imageURL = new URL("http://rprqs.16mb.com/image/" + menu_id + ".jpg");
                 Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
                 return bitmap;
             } catch (IOException e) {

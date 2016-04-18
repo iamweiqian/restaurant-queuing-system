@@ -9,54 +9,65 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class HomemadeDessertsOrderActivity extends ActionBarActivity {
+public class DessertsOrderActivity extends ActionBarActivity {
 
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homemade_desserts_order);
+        setContentView(R.layout.activity_desserts_order);
 
-        // herbal jelly
-        Button herbalJellyButton = (Button) findViewById(R.id.herbalJellyButton);
-        herbalJellyButton.setOnClickListener(
+        // Barley with Gingko
+        Button barleyGingkoButton = (Button) findViewById(R.id.barleyGingkoButton);
+        barleyGingkoButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HD001";
+                        menu_id = "D001";
                         goToItemActivity();
                     }
                 }
         );
 
-        // red bean soup
+        // Red Bean Soup
         Button redBeanSoupButton = (Button) findViewById(R.id.redBeanSoupButton);
         redBeanSoupButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HD002";
+                        menu_id = "D002";
                         goToItemActivity();
                     }
                 }
         );
 
-        // longan milk ice
-        Button longanMilkIceButton = (Button) findViewById(R.id.longanMilkIceButton);
-        longanMilkIceButton.setOnClickListener(
+        // Cheng Tang
+        Button chengTangButton = (Button) findViewById(R.id.chengTangButton);
+        chengTangButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HD003";
+                        menu_id = "D003";
                         goToItemActivity();
                     }
                 }
         );
 
-        // barley beancurd
-        Button barleyBeancurdGinkgoButton = (Button) findViewById(R.id.barleyBeancurdGinkgoButton);
-        barleyBeancurdGinkgoButton.setOnClickListener(
+        // Sesame Paste
+        Button sesamePasteButton = (Button) findViewById(R.id.sesamePasteButton);
+        sesamePasteButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        menu_id = "HD004";
+                        menu_id = "D004";
+                        goToItemActivity();
+                    }
+                }
+        );
+
+        // Tau Suan
+        Button tauSuanButton = (Button) findViewById(R.id.tauSuanButton);
+        tauSuanButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        menu_id = "D005";
                         goToItemActivity();
                     }
                 }
@@ -66,7 +77,7 @@ public class HomemadeDessertsOrderActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_homemade_desserts_order, menu);
+        getMenuInflater().inflate(R.menu.menu_desserts_order, menu);
         return true;
     }
 

@@ -18,9 +18,9 @@ public class RiceOrderActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rice_order);
 
-        // curry chicken rice
-        Button curryChickenRiceButton = (Button) findViewById(R.id.curryChickenRiceButton);
-        curryChickenRiceButton.setOnClickListener(
+        // Black Pepper Chicken Rice
+        Button blackPepperChickenRiceButton = (Button) findViewById(R.id.blackPepperChickenRiceButton);
+        blackPepperChickenRiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "R001";
@@ -29,9 +29,9 @@ public class RiceOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // sambal chicken ricew
-        Button sambalChickenRiceButton = (Button) findViewById(R.id.sambalChickenRiceButton);
-        sambalChickenRiceButton.setOnClickListener(
+        // Ginger Onion Sliced Fish Rice
+        Button gingerOnionSlicedFishRiceButton = (Button) findViewById(R.id.gingerOnionSlicedFishRiceButton);
+        gingerOnionSlicedFishRiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "R002";
@@ -40,9 +40,9 @@ public class RiceOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // sweet sour pork rice
-        Button sweetSourPorkRiceButton = (Button) findViewById(R.id.sweetSourPorkRiceButton);
-        sweetSourPorkRiceButton.setOnClickListener(
+        // Pork Ribs King Rice
+        Button porkRibsKingRiceButton = (Button) findViewById(R.id.porkRibsKingRiceButton);
+        porkRibsKingRiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "R003";
@@ -51,9 +51,9 @@ public class RiceOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // braised pork rice
-        Button braisedPorkRiceButton = (Button) findViewById(R.id.braisedPorkRiceButton);
-        braisedPorkRiceButton.setOnClickListener(
+        // Sambal Squid Rice
+        Button sambalSquidRiceButton = (Button) findViewById(R.id.sambalSquidRiceButton);
+        sambalSquidRiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "R004";
@@ -62,9 +62,9 @@ public class RiceOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // dried chilis chicken rice
-        Button driedChiliesChickenRiceButton = (Button) findViewById(R.id.driedChiliesChickenRiceButton);
-        driedChiliesChickenRiceButton.setOnClickListener(
+        // Sweet and Sour Pork Rice
+        Button sweetSourPorkRiceButton = (Button) findViewById(R.id.sweetSourPorkRiceButton);
+        sweetSourPorkRiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "R005";
@@ -73,9 +73,9 @@ public class RiceOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // ginger and onion chicken rice
-        Button gingerOnionChickenRiceButton = (Button) findViewById(R.id.gingerOnionChickenRiceButton);
-        gingerOnionChickenRiceButton.setOnClickListener(
+        // Special Sauce Diced Chicken Rice
+        Button specialSauceDicedChickenRiceButton = (Button) findViewById(R.id.specialSauceDicedChickenRiceButton);
+        specialSauceDicedChickenRiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "R006";

@@ -18,9 +18,9 @@ public class BeveragesOrderActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beverages_order);
 
-        // ice lemon tea
-        Button iceLemonTeaButton = (Button) findViewById(R.id.iceLemonTeaButton);
-        iceLemonTeaButton.setOnClickListener(
+        // Ice Coffee
+        Button iceCoffeeButton = (Button) findViewById(R.id.iceCoffeeButton);
+        iceCoffeeButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "B001";
@@ -29,9 +29,9 @@ public class BeveragesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // green tea
-        Button greenTeaButton = (Button) findViewById(R.id.greenTeaButton);
-        greenTeaButton.setOnClickListener(
+        // Ice Lemon Tea
+        Button iceLemonTeaButton = (Button) findViewById(R.id.iceLemonTeaButton);
+        iceLemonTeaButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "B002";
@@ -40,9 +40,9 @@ public class BeveragesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // 100 plus
-        Button hundredPlusButton = (Button) findViewById(R.id.hundredPlusButton);
-        hundredPlusButton.setOnClickListener(
+        // Ice Milo
+        Button iceMiloButton = (Button) findViewById(R.id.iceMiloButton);
+        iceMiloButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "B003";
@@ -51,34 +51,12 @@ public class BeveragesOrderActivity extends ActionBarActivity {
                 }
         );
 
-        // coca-cola
-        Button cocaColaButton = (Button) findViewById(R.id.cocaColaButton);
-        cocaColaButton.setOnClickListener(
+        // Mango Jelly
+        Button mangoJellyButton = (Button) findViewById(R.id.mangoJellyButton);
+        mangoJellyButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         menu_id = "B004";
-                        goToItemActivity();
-                    }
-                }
-        );
-
-        // chinese tea
-        Button chineseTeaButton = (Button) findViewById(R.id.chineseTeaButton);
-        chineseTeaButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        menu_id = "B005";
-                        goToItemActivity();
-                    }
-                }
-        );
-
-        // sky juice
-        Button skyJuiceButton = (Button) findViewById(R.id.skyJuiceButton);
-        skyJuiceButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        menu_id = "B006";
                         goToItemActivity();
                     }
                 }
