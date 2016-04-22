@@ -1,5 +1,6 @@
 package wqyap762.rprqs;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,28 +9,110 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 
 public class ViewOrderActivity extends ActionBarActivity {
 
     public static final String DEFAULT = "N/A";
+    ListView orderListView;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
 
-        // listed order update
-        Button listUpdateCustomerButton = (Button) findViewById(R.id.listUpdateCustomerButton);
-        listUpdateCustomerButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        goToOrderInformationActivity();
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
+
+        orderListView = (ListView) findViewById(R.id.orderListView);
+
+        getOrderList();
+
+    }
+
+    public void getOrderList() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        final String hpno = sharedPreferences.getString("hpno", DEFAULT);
+        final OrderAdapter orderAdapter = new OrderAdapter(this, R.layout.row_layout);
+        orderListView.setAdapter(orderAdapter);
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+//                    boolean success = jsonResponse.getBoolean("success");
+                    JSONArray orderList = jsonResponse.getJSONArray("OrderList");
+
+                    if (orderList.length() != 0) {
+                        for (int i = 0; i < orderList.length(); i++) {
+                            JSONObject object = orderList.getJSONObject(i);
+                            final String order_id = object.getString("order_id");
+                            String food_name = object.getString("food_name");
+                            String payment_status = object.getString("payment_status");
+                            String ordered_on = object.getString("ordered_on");
+                            StringTokenizer tokenizer = new StringTokenizer(ordered_on);
+                            String ordered_date = tokenizer.nextToken();
+
+                            Order order = new Order(order_id, food_name, payment_status, ordered_date);
+                            orderAdapter.add(order);
+
+                            orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    ViewGroup vg = (ViewGroup) view;
+                                    TextView textView = (TextView) vg.findViewById(R.id.orderIdText);
+                                    Intent intent = new Intent(ViewOrderActivity.this, OrderInfomationActivity.class);
+                                    intent.putExtra("order_id", textView.getText().toString());
+                                    startActivity(intent);
+                                }
+                            });
+
+                        }
+                        orderAdapter.notifyDataSetChanged();
+                        spinner.setVisibility(View.GONE);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrderActivity.this);
+                        builder.setMessage("Order(s) Failed to be retrieved")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-        );
+            }
+        };
+
+        ViewOrderRequest viewOrderRequest = new ViewOrderRequest(hpno, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ViewOrderActivity.this);
+        queue.add(viewOrderRequest);
     }
 
     @Override
@@ -52,12 +135,5 @@ public class ViewOrderActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void goToOrderInformationActivity() {
-        String order_id = "21";
-        Intent intent = new Intent(this, OrderInfomationActivity.class);
-        intent.putExtra("order_id", order_id);
-        startActivity(intent);
     }
 }

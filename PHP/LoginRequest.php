@@ -2,8 +2,8 @@
 	require "init.php";
 	require "password.php";
     
-    $hpno = $_POST["hpno"];
-    $password = $_POST["password"];
+    $hpno = $_POST['hpno'];
+    $password = $_POST['password'];
     
     $statement = mysqli_prepare($con, "SELECT * FROM User WHERE hpno = ?");
     mysqli_stmt_bind_param($statement, "s", $hpno);
