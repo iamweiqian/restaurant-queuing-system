@@ -65,8 +65,7 @@ public class OrderInfomationActivity extends ActionBarActivity {
     public void getOrderInformation() {
         Intent intent = getIntent();
         final String order_id = intent.getStringExtra("order_id");
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        final String hpno = sharedPreferences.getString("hpno", DEFAULT);
+        final String hpno = SaveSharedPreferences.getPrefHpno(OrderInfomationActivity.this);
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
 

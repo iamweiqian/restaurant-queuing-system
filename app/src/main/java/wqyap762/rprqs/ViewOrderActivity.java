@@ -56,8 +56,7 @@ public class ViewOrderActivity extends ActionBarActivity {
     }
 
     public void getOrderList() {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        final String hpno = sharedPreferences.getString("hpno", DEFAULT);
+        final String hpno = SaveSharedPreferences.getPrefHpno(ViewOrderActivity.this);
         final OrderAdapter orderAdapter = new OrderAdapter(this, R.layout.row_layout);
         orderListView.setAdapter(orderAdapter);
 
@@ -67,7 +66,6 @@ public class ViewOrderActivity extends ActionBarActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
-//                    boolean success = jsonResponse.getBoolean("success");
                     JSONArray orderList = jsonResponse.getJSONArray("OrderList");
 
                     if (orderList.length() != 0) {

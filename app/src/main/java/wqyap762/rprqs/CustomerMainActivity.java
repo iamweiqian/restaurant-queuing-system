@@ -20,18 +20,6 @@ public class CustomerMainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        /*Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        String name = intent.getStringExtra("name");
-        String hpno = intent.getStringExtra("hpno");
-
-        String message = "Welcome! " + name;
-        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerMainActivity.this);
-        builder.setMessage(message)
-                .setPositiveButton("Okay", null)
-                .create()
-                .show();*/
-
 
         // order food button
         Button orderFoodButton = (Button) findViewById(R.id.orderFoodButton);
@@ -100,10 +88,7 @@ public class CustomerMainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // user press Proceed button. Write logic here
-                    SharedPreferences sharedPreferences =getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.clear();
-                    editor.commit();
+                    SaveSharedPreferences.clearHpno(CustomerMainActivity.this);
                     finish();
                     goToLoginActivity();
                 }

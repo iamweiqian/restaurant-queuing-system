@@ -28,9 +28,15 @@ public class MainActivity extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    final Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
-                    MainActivity.this.startActivity(mainIntent);
-                    MainActivity.this.finish();
+                    if (SaveSharedPreferences.getPrefHpno(MainActivity.this).length() == 0) {
+                        final Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        MainActivity.this.startActivity(mainIntent);
+                        MainActivity.this.finish();
+                    } else {
+                        final Intent mainIntent = new Intent(MainActivity.this, CustomerMainActivity.class);
+                        MainActivity.this.startActivity(mainIntent);
+                        MainActivity.this.finish();
+                    }
                 }
             }, 2500);
         } else {

@@ -201,12 +201,11 @@ public class ItemActivity extends ActionBarActivity {
     }
 
     public void orderButtonClicked (View v) {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         final Double total_price = Double.parseDouble(totalPriceText.getText().toString());
         final int quantity = Integer.parseInt(quantityText.getText().toString());
         final String payment_status = "Unpaid";
-        final String hpno = sharedPreferences.getString("hpno", DEFAULT);
+        final String hpno = SaveSharedPreferences.getPrefHpno(ItemActivity.this);
         final String menu_id = intent.getStringExtra("menu_id");
         final Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

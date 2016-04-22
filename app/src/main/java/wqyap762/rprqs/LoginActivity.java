@@ -92,12 +92,9 @@ public class LoginActivity extends Activity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
-                        userDataSaved(v);
-                        String name = jsonResponse.getString("name");
+                        SaveSharedPreferences.setPrefHpno(LoginActivity.this, hpno);
 
                         Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
-                        intent.putExtra("name", name);
-
                         LoginActivity.this.startActivity(intent);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -116,13 +113,6 @@ public class LoginActivity extends Activity {
         LoginRequest loginRequest = new LoginRequest(hpno, password, responseListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(loginRequest);
-    }
-
-    public void userDataSaved(View v) {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("hpno", hpnoText.getText().toString());
-        editor.commit();
     }
 
     public boolean onKeyDown(int keycode, KeyEvent event) {
