@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,8 +38,8 @@ import java.util.StringTokenizer;
 
 public class ViewOrderActivity extends ActionBarActivity {
 
-    public static final String DEFAULT = "N/A";
     ListView orderListView;
+    private SwipeRefreshLayout swipeContainer;
     private ProgressBar spinner;
 
     @Override
@@ -53,6 +54,7 @@ public class ViewOrderActivity extends ActionBarActivity {
 
         getOrderList();
 
+        swipeToRefresh();
     }
 
     public void getOrderList() {
@@ -95,6 +97,7 @@ public class ViewOrderActivity extends ActionBarActivity {
                         }
                         orderAdapter.notifyDataSetChanged();
                         spinner.setVisibility(View.GONE);
+                        swipeContainer.setRefreshing(false);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrderActivity.this);
                         builder.setMessage("Order(s) Failed to be retrieved")
@@ -111,6 +114,18 @@ public class ViewOrderActivity extends ActionBarActivity {
         ViewOrderRequest viewOrderRequest = new ViewOrderRequest(hpno, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ViewOrderActivity.this);
         queue.add(viewOrderRequest);
+    }
+
+    public void swipeToRefresh() {
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getOrderList();
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_dark);
     }
 
     @Override

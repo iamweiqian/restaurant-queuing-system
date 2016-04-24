@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 
 public class RegisterActivity extends Activity {
 
-    EditText hpnoText, nameText, usernameText, passwordText, confirmPasswordText;
+    EditText hpnoText, nameText, passwordText, confirmPasswordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

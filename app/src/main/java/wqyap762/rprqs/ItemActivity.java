@@ -37,7 +37,6 @@ import java.util.Date;
 
 public class ItemActivity extends ActionBarActivity {
 
-    public static final String DEFAULT = "N/A";
     ImageView itemImage;
     TextView foodNameText, descriptionText, basicPriceText, totalPriceText;
     EditText quantityText;

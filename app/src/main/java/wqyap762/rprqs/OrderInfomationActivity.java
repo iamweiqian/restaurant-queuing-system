@@ -26,7 +26,6 @@ import java.util.StringTokenizer;
 
 public class OrderInfomationActivity extends ActionBarActivity {
 
-    public static final String DEFAULT = "N/A";
     TextView orderIdText, nameText, hpnoText, foodNameText, quantityText, totalPriceText, orderDateText, orderTimeText, paymentStatusText;
     private ProgressBar spinner;
 
