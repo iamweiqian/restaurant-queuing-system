@@ -19,7 +19,7 @@
 		// $message = "Update Successfully.";
 		// array_push($response, array("code"=>$code, "message"=>$message));
 		// echo json_encode(array("server_response"=>$response));
-		header("Location: http://rprqs.16mb.com/SearchOrder.php");
+		header("Location: http://rprqs.16mb.com/index.php");
     exit;
 	}
 	mysqli_close($con);
