@@ -1,17 +1,32 @@
-<?php
-	require "init.php";
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Login</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
 
-	$sql_query = "SELECT * FROM User WHERE username LIKE '$username' and password LIKE '$password';";
+<body>
+<h1><center>
+  <p>&nbsp;</p>
+  <p>Restaurant Parit Raja Management System</p>
+  <p>&nbsp;</p>
+</center></h1>
+<form action="LoginRequest(Admin).php" method="POST">
+	<table class="center">
+		<tr>
+			<td>Username: </td>
+			<td><input type="text" name="hpno" /></td>
+        </tr>
+        <tr>
+      		<td>Password: </td>
+			<td><input type="text" name="password" /></td>
+		</tr>
+        <tr>
+            <td colspan=2><input type="submit" value="Log in"></td>
+        </tr>
+  </table>
+	<p>&nbsp;</p>
+</form>
 
-	$result = mysqli_query($con, $sql_query);
-
-	if (mysqli_num_rows($result) > 0) {
-		$row = mysqli_fetch_assoc($result);
-		$username = $row["username"];
-		// echo "Login Success. Welcome ".$fullname;
-	} else {
-		echo "Login Failed. Try again";
-	}
-?>
+</body>
+</html>
