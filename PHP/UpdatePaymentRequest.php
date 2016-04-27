@@ -3,7 +3,7 @@
 	$order_id = $_POST['order_id'];
 	$payment_status = $_POST['payment_status'];
 
-	$sql_query = "UPDATE `Order` SET payment_status = '$payment_status' WHERE order_id LIKE '$order_id';";
+	$sql_query = "UPDATE `Order` SET payment_status = '$payment_status' WHERE order_id = '$order_id'";
 	$result = mysqli_query($con, $sql_query) or die("Error: ".mysqli_error($con));
 
 	if (!$result) {
@@ -13,11 +13,8 @@
 		array_push($response, array("code"=>$code, "message"=>$message));
 		echo json_encode(array("server_response"=>$response));
 	} else {
-		$response = array();
-		$code = "reg_true";
-		$message = "Update Successfully.";
-		array_push($response, array("code"=>$code, "message"=>$message));
-		echo json_encode(array("server_response"=>$response));
+		header("Location: http://rprqs.16mb.com/");
+    exit;
 	}
 	mysqli_close($con);
 ?>
