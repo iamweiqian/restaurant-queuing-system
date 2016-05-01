@@ -86,7 +86,7 @@ public class OrderInfomationActivity extends AppCompatActivity {
                         String name = jsonResponse.getString("name");
                         String food_name = jsonResponse.getString("food_name");
                         String quantity = jsonResponse.getString("quantity");
-                        String total_price = jsonResponse.getString("total_price");
+                        Double total_price = jsonResponse.getDouble("total_price");
                         String ordered_on = jsonResponse.getString("ordered_on");
                         StringTokenizer tokenizer = new StringTokenizer(ordered_on);
                         String ordered_date = tokenizer.nextToken();
@@ -98,7 +98,7 @@ public class OrderInfomationActivity extends AppCompatActivity {
                         hpnoText.setText(hpno);
                         foodNameText.setText(food_name);
                         quantityText.setText(quantity);
-                        totalPriceText.setText(total_price);
+                        totalPriceText.setText(String.format("%.2f", total_price));
                         orderDateText.setText(ordered_date);
                         orderTimeText.setText(ordered_time);
                         paymentStatusText.setText(payment_status);

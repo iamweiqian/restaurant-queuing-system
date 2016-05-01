@@ -42,9 +42,9 @@ public class ItemActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     ImageView itemImage;
-    TextView foodNameText, descriptionText, basicPriceText, totalPriceText;
-    EditText quantityText;
+    TextView foodNameText, descriptionText, basicPriceText, totalPriceText, quantityText;
     private ProgressBar spinner;
+    int quantity = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class ItemActivity extends AppCompatActivity {
         descriptionText = (TextView) findViewById(R.id.descriptionText);
         basicPriceText = (TextView) findViewById(R.id.basicPriceText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
-        quantityText = (EditText) findViewById(R.id.quantityText);
+        quantityText = (TextView) findViewById(R.id.quantityText);
 
         new downloadImage().execute();
         getMenu();
@@ -158,11 +158,12 @@ public class ItemActivity extends AppCompatActivity {
                     if (success) {
                         String food_name = jsonResponse.getString("food_name");
                         String description = jsonResponse.getString("description");
-                        String basic_price = jsonResponse.getString("basic_price");
+                        double basic_price = jsonResponse.getDouble("basic_price");
+//                        String basic_price = jsonResponse.getString("basic_price");
 
                         foodNameText.setText(food_name);
                         descriptionText.setText(description);
-                        basicPriceText.setText(basic_price);
+                        basicPriceText.setText(String.format("%.2f", basic_price));
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
                         builder.setMessage("Item Retrieve Failed")
@@ -181,6 +182,32 @@ public class ItemActivity extends AppCompatActivity {
         queue.add(menuRequest);
     }
 
+    public void increaseInteger(View view) {
+        quantity = quantity + 1;
+        if (quantity > 10) {
+            quantity = 10;
+            display(quantity);
+        } else {
+            display(quantity);
+        }
+    }
+
+    public void decreaseInteger(View view) {
+        quantity = quantity - 1;
+        if (quantity <= 0) {
+            quantity = 0;
+            display(quantity);
+        } else {
+            display(quantity);
+        }
+    }
+
+    private void display(int number) {
+        TextView displayQuantity = (TextView) findViewById(
+                R.id.quantityText);
+        displayQuantity.setText(String.valueOf(number));
+    }
+
     public void totalPriceCalculated() {
         quantityText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -190,14 +217,14 @@ public class ItemActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtils.isEmpty(quantityText.getText().toString())) {
+//                if (!TextUtils.isEmpty(quantityText.getText().toString())) {
                     Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
                     Double quantity = Double.parseDouble(quantityText.getText().toString());
-                    totalPriceText.setText(String.valueOf(basicPrice * quantity));
-                } else {
-                    quantityText.setError("Please enter quantity.");
-                    return;
-                }
+                    totalPriceText.setText(String.format("%.2f", basicPrice * quantity));
+//                } else {
+//                    quantityText.setError("Please enter quantity.");
+//                    return;
+//                }
             }
 
             @Override
