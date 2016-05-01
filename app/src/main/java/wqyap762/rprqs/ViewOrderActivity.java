@@ -79,41 +79,32 @@ public class ViewOrderActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray orderList = jsonResponse.getJSONArray("OrderList");
 
-                    if (orderList.length() != 0) {
-                        for (int i = 0; i < orderList.length(); i++) {
-                            JSONObject object = orderList.getJSONObject(i);
-                            final String order_id = object.getString("order_id");
-                            String food_name = object.getString("food_name");
-                            String payment_status = object.getString("payment_status");
-                            String ordered_on = object.getString("ordered_on");
-                            StringTokenizer tokenizer = new StringTokenizer(ordered_on);
-                            String ordered_date = tokenizer.nextToken();
+                    for (int i = 0; i < orderList.length(); i++) {
+                        JSONObject object = orderList.getJSONObject(i);
+                        final String order_id = object.getString("order_id");
+                        String food_name = object.getString("food_name");
+                        String payment_status = object.getString("payment_status");
+                        String ordered_on = object.getString("ordered_on");
+                        StringTokenizer tokenizer = new StringTokenizer(ordered_on);
+                        String ordered_date = tokenizer.nextToken();
 
-                            Order order = new Order(order_id, food_name, payment_status, ordered_date);
-                            orderAdapter.add(order);
+                        Order order = new Order(order_id, food_name, payment_status, ordered_date);
+                        orderAdapter.add(order);
 
-                            orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    ViewGroup vg = (ViewGroup) view;
-                                    TextView textView = (TextView) vg.findViewById(R.id.orderIdText);
-                                    Intent intent = new Intent(ViewOrderActivity.this, OrderInfomationActivity.class);
-                                    intent.putExtra("order_id", textView.getText().toString());
-                                    startActivity(intent);
-                                }
-                            });
-
-                        }
-                        orderAdapter.notifyDataSetChanged();
-                        spinner.setVisibility(View.GONE);
-                        swipeContainer.setRefreshing(false);
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrderActivity.this);
-                        builder.setMessage("Order(s) Failed to be retrieved")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+                        orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                ViewGroup vg = (ViewGroup) view;
+                                TextView textView = (TextView) vg.findViewById(R.id.orderIdText);
+                                Intent intent = new Intent(ViewOrderActivity.this, OrderInfomationActivity.class);
+                                intent.putExtra("order_id", textView.getText().toString());
+                                startActivity(intent);
+                            }
+                        });
                     }
+                    orderAdapter.notifyDataSetChanged();
+                    spinner.setVisibility(View.GONE);
+                    swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

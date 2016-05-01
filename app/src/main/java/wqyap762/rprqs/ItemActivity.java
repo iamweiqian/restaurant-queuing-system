@@ -159,7 +159,6 @@ public class ItemActivity extends AppCompatActivity {
                         String food_name = jsonResponse.getString("food_name");
                         String description = jsonResponse.getString("description");
                         double basic_price = jsonResponse.getDouble("basic_price");
-//                        String basic_price = jsonResponse.getString("basic_price");
 
                         foodNameText.setText(food_name);
                         descriptionText.setText(description);
@@ -217,14 +216,9 @@ public class ItemActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (!TextUtils.isEmpty(quantityText.getText().toString())) {
-                    Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
-                    Double quantity = Double.parseDouble(quantityText.getText().toString());
-                    totalPriceText.setText(String.format("%.2f", basicPrice * quantity));
-//                } else {
-//                    quantityText.setError("Please enter quantity.");
-//                    return;
-//                }
+                Double basicPrice = Double.parseDouble(basicPriceText.getText().toString());
+                Double quantity = Double.parseDouble(quantityText.getText().toString());
+                totalPriceText.setText(String.format("%.2f", basicPrice * quantity));
             }
 
             @Override
