@@ -8,7 +8,8 @@ import android.preference.PreferenceManager;
  * Created by wqyap762 on 22/04/16.
  */
 public class SaveSharedPreferences {
-    static final String PREF_HPNO= "hpno";
+    static final String PREF_HPNO = "hpno";
+    static final String PREF_NAME = "name";
 
     static SharedPreferences getSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -18,7 +19,7 @@ public class SaveSharedPreferences {
     {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(PREF_HPNO, hpno);
-        editor.commit();
+        editor.apply();
     }
 
     public static String getPrefHpno(Context context)
@@ -26,7 +27,19 @@ public class SaveSharedPreferences {
         return getSharedPreferences(context).getString(PREF_HPNO, "");
     }
 
-    public static void clearHpno(Context context)
+    public static void setPrefName(Context context, String name)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(PREF_NAME, name);
+        editor.apply();
+    }
+
+    public static String getPrefName(Context context)
+    {
+        return getSharedPreferences(context).getString(PREF_NAME, "");
+    }
+
+    public static void clearPref(Context context)
     {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.clear(); //clear all stored data

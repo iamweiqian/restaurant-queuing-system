@@ -1,65 +1,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="wqyap762.rprqs.SetOrderActivity">
 
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
     <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/gridLayout4"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp">
 
         <Button
-            android:layout_width="350dp"
-            android:layout_height="70dp"
-            android:text="Set A"
             android:id="@+id/setAButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_column="0"
             android:layout_row="0"
-            android:layout_column="0" />
+            android:text="Set A" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Set B"
             android:id="@+id/setBButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_column="0"
             android:layout_row="1"
-            android:layout_column="0" />
+            android:text="Set B" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Set C"
             android:id="@+id/setCButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_column="0"
             android:layout_row="2"
-            android:layout_column="0" />
+            android:text="Set C" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Set D"
             android:id="@+id/setDButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_column="0"
             android:layout_row="3"
-            android:layout_column="0" />
+            android:text="Set D" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Set E"
             android:id="@+id/setEButton"
-            android:layout_row="4"
-            android:layout_column="0" />
-
-        <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="Set F"
+            android:layout_column="0"
+            android:layout_row="4"
+            android:text="Set E" />
+
+        <Button
             android:id="@+id/setFButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_column="0"
             android:layout_row="5"
-            android:layout_column="0" />
+            android:text="Set F" />
     </GridLayout>
 
 </RelativeLayout>

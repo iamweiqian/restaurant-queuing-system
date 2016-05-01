@@ -17,20 +17,16 @@
     <string name="title_activity_rice_order">Rice</string>
     <string name="title_activity_noodles_order">Noodles</string>
     <string name="title_activity_beverages_order">Beverages</string>
-    <string name="title_activity_homemade_desserts_order">Homemade Desserts</string>
-    <string name="title_activity_homemade_beverages_order">Homemade Beverages</string>
-    <string name="title_activity_manage_order_admin">Order List</string>
-    <string name="title_activity_order_info_admin">Order Information</string>
-    <string name="title_activity_order_update_admin">Order Update</string>
-    <string name="title_activity_set_a">Set A</string>
-    <string name="title_activity_manage_order_customer">Order List</string>
-    <string name="title_activity_order_info_customer">Order Information</string>
-    <string name="title_activity_order_update_customer">Order Update</string>
+    <string name="title_activity_desserts_order">Desserts</string>
+    <string name="title_activity_fruit_juice_order">Fruit Juice</string>
+    <string name="title_activity_item">Item Information</string>
+    <string name="title_activity_view_order">Order List</string>
+    <string name="title_activity_order_information">Order Information</string>
     <string name="LogOutButton">Log out</string>
-    <string name="title_activity_track_waiting_time_admin">Order List</string>
-    <string name="title_activity_track_order_admin">Track Order</string>
-    <string name="title_activity_track_waiting_time_customer">Order List
-    </string>
-    <string name="title_activity_track_order_customer">Track Order</string>
-    <string name="title_activity_view_report">Report</string>
+    <string name="title_activity_track_waiting_time">Order List</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

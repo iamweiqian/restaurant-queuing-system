@@ -76,7 +76,7 @@
         </activity>
         <activity
             android:name=".DessertsOrderActivity"
-            android:label="Desserts"
+            android:label="@string/title_activity_desserts_order"
             android:parentActivityName=".OrderFoodActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,7 +84,7 @@
         </activity>
         <activity
             android:name=".FruitJuiceOrderActivity"
-            android:label="Fruit Juice"
+            android:label="@string/title_activity_fruit_juice_order"
             android:parentActivityName=".OrderFoodActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -92,7 +92,7 @@
         </activity>
         <activity
             android:name=".ItemActivity"
-            android:label="Item Information"
+            android:label="@string/title_activity_item"
             android:parentActivityName=".SetOrderActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -100,7 +100,7 @@
         </activity>
         <activity
             android:name=".ViewOrderActivity"
-            android:label="@string/title_activity_manage_order_customer"
+            android:label="@string/title_activity_view_order"
             android:parentActivityName=".CustomerMainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -108,7 +108,7 @@
         </activity>
         <activity
             android:name=".OrderInfomationActivity"
-            android:label="@string/title_activity_order_info_customer"
+            android:label="@string/title_activity_order_information"
             android:parentActivityName=".ViewOrderActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -116,7 +116,7 @@
         </activity>
         <activity
             android:name=".TrackWaitingTimeActivity"
-            android:label="@string/title_activity_track_waiting_time_customer"
+            android:label="@string/title_activity_track_waiting_time"
             android:parentActivityName=".CustomerMainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

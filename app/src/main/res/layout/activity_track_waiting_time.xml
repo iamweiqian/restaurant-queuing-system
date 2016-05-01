@@ -1,71 +1,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".TrackWaitingTimeActivity">
 
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
     <TableLayout
+        android:id="@+id/tableLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tableLayout4"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@id/app_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="0" >
+                android:layout_column="0">
 
                 <TextView
+                    android:id="@+id/textView71"
                     android:layout_width="71dp"
                     android:layout_height="37dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="No."
-                    android:id="@+id/textView71" />
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </TableRow>
 
             <TextView
+                android:id="@+id/textView72"
                 android:layout_width="180dp"
                 android:layout_height="37dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="1"
                 android:text="Order"
-                android:id="@+id/textView72"
-                android:layout_column="1" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textView73"
                 android:layout_width="71dp"
                 android:layout_height="37dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="0"
                 android:text="1"
-                android:id="@+id/textView73"
-                android:layout_column="0" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
+                android:id="@+id/textView74"
                 android:layout_width="180dp"
                 android:layout_height="37dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_column="1"
                 android:text="Set A"
-                android:id="@+id/textView74"
-                android:layout_column="1" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
+                android:id="@+id/trackCustomerButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Track"
-                android:id="@+id/trackCustomerButton"
-                android:layout_column="2" />
+                android:layout_column="2"
+                android:text="Track" />
         </TableRow>
     </TableLayout>
 </RelativeLayout>

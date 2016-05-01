@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
@@ -25,8 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     EditText hpnoText, passwordText;
     private ProgressBar spinner;
 
@@ -34,6 +37,8 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
 
         hpnoText = (EditText) findViewById(R.id.hpnoText);
         passwordText = (EditText) findViewById(R.id.passwordText);
@@ -92,7 +97,9 @@ public class LoginActivity extends Activity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
+                        String name = jsonResponse.getString("name");
                         SaveSharedPreferences.setPrefHpno(LoginActivity.this, hpno);
+                        SaveSharedPreferences.setPrefName(LoginActivity.this, name);
 
                         Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
                         LoginActivity.this.startActivity(intent);
