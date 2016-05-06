@@ -1,8 +1,6 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,19 +12,20 @@ import android.widget.Button;
 
 public class OrderFoodActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_food);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // set lunch / set dinner
         Button setOrderButton = (Button) findViewById(R.id.setOrderButton);
+        assert setOrderButton != null;
         setOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -37,6 +36,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // rice
         Button riceOrderButton = (Button) findViewById(R.id.riceOrderButton);
+        assert riceOrderButton != null;
         riceOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -47,6 +47,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // noodles
         Button noodlesOrderButton = (Button) findViewById(R.id.noodlesOrderButton);
+        assert noodlesOrderButton != null;
         noodlesOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -57,6 +58,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // beverages
         Button beveragesOrderButton = (Button) findViewById(R.id.beveragesOrderButton);
+        assert beveragesOrderButton != null;
         beveragesOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -67,6 +69,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // homemade desserts
         Button fruitJuiceOrderButton = (Button) findViewById(R.id.fruitJuiceOrderButton);
+        assert fruitJuiceOrderButton != null;
         fruitJuiceOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -77,6 +80,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // homemade beverages
         Button dessertsOrderButton = (Button) findViewById(R.id.dessertsOrderButton);
+        assert dessertsOrderButton != null;
         dessertsOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {

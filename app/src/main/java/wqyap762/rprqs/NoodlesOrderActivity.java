@@ -1,7 +1,6 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,20 +12,22 @@ import android.widget.Button;
 
 public class NoodlesOrderActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noodles_order);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Dumpling Noodles
         Button dumplingNoodlesButton = (Button) findViewById(R.id.dumplingNoodlesButton);
+        assert dumplingNoodlesButton != null;
         dumplingNoodlesButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -38,6 +39,7 @@ public class NoodlesOrderActivity extends AppCompatActivity {
 
         // Wanton Noodles
         Button wanTonNoodlesButton = (Button) findViewById(R.id.wanTonNoodlesButton);
+        assert wanTonNoodlesButton != null;
         wanTonNoodlesButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -49,6 +51,7 @@ public class NoodlesOrderActivity extends AppCompatActivity {
 
         // Fried Fish Bee Hoon Soup
         Button friedFishBeeHoonSoupButton = (Button) findViewById(R.id.friedFishBeeHoonSoupButton);
+        assert friedFishBeeHoonSoupButton != null;
         friedFishBeeHoonSoupButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -60,6 +63,7 @@ public class NoodlesOrderActivity extends AppCompatActivity {
 
         // Sliced Fish Bee Hoon Soup
         Button slicedFishBeeHoonSoupButton = (Button) findViewById(R.id.slicedFishBeeHoonSoupButton);
+        assert slicedFishBeeHoonSoupButton != null;
         slicedFishBeeHoonSoupButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -71,6 +75,7 @@ public class NoodlesOrderActivity extends AppCompatActivity {
 
         // Sin Chew Bee Hoon
         Button sinChewBeeHoonButton = (Button) findViewById(R.id.sinChewBeeHoonButton);
+        assert sinChewBeeHoonButton != null;
         sinChewBeeHoonButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -82,6 +87,7 @@ public class NoodlesOrderActivity extends AppCompatActivity {
 
         // Ee Mee
         Button eeMeeButton = (Button) findViewById(R.id.eeMeeButton);
+        assert eeMeeButton != null;
         eeMeeButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {

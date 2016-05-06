@@ -1,7 +1,6 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,20 +12,22 @@ import android.widget.Button;
 
 public class FruitJuiceOrderActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fruit_juice_order);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Apple Bittergourd Juice
         Button applebittergourdJuiceButton = (Button) findViewById(R.id.applebittergourdJuiceButton);
+        assert applebittergourdJuiceButton != null;
         applebittergourdJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -38,6 +39,7 @@ public class FruitJuiceOrderActivity extends AppCompatActivity {
 
         // Apple Carrot Juice
         Button appleCarrotJuiceButton = (Button) findViewById(R.id.appleCarrotJuiceButton);
+        assert appleCarrotJuiceButton != null;
         appleCarrotJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -49,6 +51,7 @@ public class FruitJuiceOrderActivity extends AppCompatActivity {
 
         // Green Apple Celery Juice
         Button greenAppleCeleryJuiceButton = (Button) findViewById(R.id.greenAppleCeleryJuiceButton);
+        assert greenAppleCeleryJuiceButton != null;
         greenAppleCeleryJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -60,6 +63,7 @@ public class FruitJuiceOrderActivity extends AppCompatActivity {
 
         // Guava and Sour Plum Juice
         Button guavaSourPlumJuice = (Button) findViewById(R.id.guavaSourPlumJuice);
+        assert guavaSourPlumJuice != null;
         guavaSourPlumJuice.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -71,6 +75,7 @@ public class FruitJuiceOrderActivity extends AppCompatActivity {
 
         // Watermelon Orange Juice
         Button watermelonOrangeJuiceButton = (Button) findViewById(R.id.watermelonOrangeJuiceButton);
+        assert watermelonOrangeJuiceButton != null;
         watermelonOrangeJuiceButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {

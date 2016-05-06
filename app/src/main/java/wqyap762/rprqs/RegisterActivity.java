@@ -1,6 +1,5 @@
 package wqyap762.rprqs;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,17 +24,18 @@ import java.util.regex.Matcher;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     EditText hpnoText, nameText, passwordText, confirmPasswordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_account);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         nameText = (EditText) findViewById(R.id.nameText);
         hpnoText = (EditText) findViewById(R.id.hpnoText);
@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // register account button
         final Button registerAccountButton = (Button) findViewById(R.id.registerAccountButton);
+        assert registerAccountButton != null;
         registerAccountButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(final View v) {

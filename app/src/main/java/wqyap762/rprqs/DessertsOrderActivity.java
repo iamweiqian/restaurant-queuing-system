@@ -1,7 +1,6 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,20 +12,22 @@ import android.widget.Button;
 
 public class DessertsOrderActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desserts_order);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Barley with Gingko
         Button barleyGingkoButton = (Button) findViewById(R.id.barleyGingkoButton);
+        assert barleyGingkoButton != null;
         barleyGingkoButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -38,6 +39,7 @@ public class DessertsOrderActivity extends AppCompatActivity {
 
         // Red Bean Soup
         Button redBeanSoupButton = (Button) findViewById(R.id.redBeanSoupButton);
+        assert redBeanSoupButton != null;
         redBeanSoupButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -49,6 +51,7 @@ public class DessertsOrderActivity extends AppCompatActivity {
 
         // Cheng Tang
         Button chengTangButton = (Button) findViewById(R.id.chengTangButton);
+        assert chengTangButton != null;
         chengTangButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -60,6 +63,7 @@ public class DessertsOrderActivity extends AppCompatActivity {
 
         // Sesame Paste
         Button sesamePasteButton = (Button) findViewById(R.id.sesamePasteButton);
+        assert sesamePasteButton != null;
         sesamePasteButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -71,6 +75,7 @@ public class DessertsOrderActivity extends AppCompatActivity {
 
         // Tau Suan
         Button tauSuanButton = (Button) findViewById(R.id.tauSuanButton);
+        assert tauSuanButton != null;
         tauSuanButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {

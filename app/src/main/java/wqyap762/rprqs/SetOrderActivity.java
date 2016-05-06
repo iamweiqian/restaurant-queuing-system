@@ -1,7 +1,6 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,20 +12,22 @@ import android.widget.Button;
 
 public class SetOrderActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_order);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // set A
         Button setAButton = (Button) findViewById(R.id.setAButton);
+        assert setAButton != null;
         setAButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -38,6 +39,7 @@ public class SetOrderActivity extends AppCompatActivity {
 
         // set B
         Button setBButton = (Button) findViewById(R.id.setBButton);
+        assert setBButton != null;
         setBButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -49,6 +51,7 @@ public class SetOrderActivity extends AppCompatActivity {
 
         // set C
         Button setCButton = (Button) findViewById(R.id.setCButton);
+        assert setCButton != null;
         setCButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -60,6 +63,7 @@ public class SetOrderActivity extends AppCompatActivity {
 
         // set D
         Button setDButton = (Button) findViewById(R.id.setDButton);
+        assert setDButton != null;
         setDButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -71,6 +75,7 @@ public class SetOrderActivity extends AppCompatActivity {
 
         // set E
         Button setEButton = (Button) findViewById(R.id.setEButton);
+        assert setEButton != null;
         setEButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -82,6 +87,7 @@ public class SetOrderActivity extends AppCompatActivity {
 
         // set F
         Button setFButton = (Button) findViewById(R.id.setFButton);
+        assert setFButton != null;
         setFButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {

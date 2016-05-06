@@ -1,15 +1,12 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,7 +36,6 @@ import java.util.Date;
 
 public class ItemActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     ImageView itemImage;
     TextView foodNameText, descriptionText, basicPriceText, totalPriceText, quantityText;
     private ProgressBar spinner;
@@ -50,13 +45,17 @@ public class ItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         spinner=(ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.VISIBLE);
+        if (spinner != null) {
+            spinner.setVisibility(View.VISIBLE);
+        }
 
         itemImage = (ImageView) findViewById(R.id.itemImage);
         foodNameText = (TextView) findViewById(R.id.foodNameText);
@@ -72,12 +71,12 @@ public class ItemActivity extends AppCompatActivity {
 
         // customer order
         Button orderButton = (Button) findViewById(R.id.orderButton);
+        assert orderButton != null;
         orderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(final View v) {
                         if (TextUtils.isEmpty(quantityText.getText().toString())) {
                             quantityText.setError("Please enter quantity.");
-                            return;
                         } else {
                             final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(ItemActivity.this);
 
@@ -124,8 +123,7 @@ public class ItemActivity extends AppCompatActivity {
         protected Bitmap doInBackground(Void... params) {
             try {
                 URL imageURL = new URL("http://rprqs.16mb.com/image/" + menu_id + ".jpg");
-                Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
-                return bitmap;
+                return BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -202,8 +200,8 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void display(int number) {
-        TextView displayQuantity = (TextView) findViewById(
-                R.id.quantityText);
+        TextView displayQuantity = (TextView) findViewById(R.id.quantityText);
+        assert displayQuantity != null;
         displayQuantity.setText(String.valueOf(number));
     }
 

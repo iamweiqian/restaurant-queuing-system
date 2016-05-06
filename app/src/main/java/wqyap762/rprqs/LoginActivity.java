@@ -1,10 +1,7 @@
 package wqyap762.rprqs;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,7 +26,6 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     EditText hpnoText, passwordText;
     private ProgressBar spinner;
 
@@ -37,29 +33,29 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
         hpnoText = (EditText) findViewById(R.id.hpnoText);
         passwordText = (EditText) findViewById(R.id.passwordText);
         spinner=(ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.GONE);
+        if (spinner != null) {
+            spinner.setVisibility(View.GONE);
+        }
 
         // sign in button
         Button signiInButton = (Button) findViewById(R.id.signInButton);
+        assert signiInButton != null;
         signiInButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if (TextUtils.isEmpty(hpnoText.getText().toString())) {
                             hpnoText.setError("Please enter username");
-                            return;
                         } else if (TextUtils.isEmpty(passwordText.getText().toString())) {
                             passwordText.setError("Please enter password");
-                            return;
                         } else if (TextUtils.isEmpty(hpnoText.getText().toString()) && TextUtils.isEmpty(passwordText.getText().toString())) {
                             hpnoText.setError("Please enter username");
                             passwordText.setError("Please enter password");
-                            return;
                         } else {
                             spinner.setVisibility(View.VISIBLE);
                             loginButtonClicked(v);
@@ -73,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView registerAccountLink = (TextView) findViewById(R.id.registerAccountLink);
         SpannableString spanString = new SpannableString(text);
         spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
+        assert registerAccountLink != null;
         registerAccountLink.setText(spanString);
 
         registerAccountLink.setOnClickListener(

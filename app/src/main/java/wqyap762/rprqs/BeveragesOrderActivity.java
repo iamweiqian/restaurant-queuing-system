@@ -1,7 +1,6 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,21 +12,22 @@ import android.widget.Button;
 
 public class BeveragesOrderActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
     String menu_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beverages_order);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Ice Coffee
         Button iceCoffeeButton = (Button) findViewById(R.id.iceCoffeeButton);
+        assert iceCoffeeButton != null;
         iceCoffeeButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -39,6 +39,7 @@ public class BeveragesOrderActivity extends AppCompatActivity {
 
         // Ice Lemon Tea
         Button iceLemonTeaButton = (Button) findViewById(R.id.iceLemonTeaButton);
+        assert iceLemonTeaButton != null;
         iceLemonTeaButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -50,6 +51,7 @@ public class BeveragesOrderActivity extends AppCompatActivity {
 
         // Ice Milo
         Button iceMiloButton = (Button) findViewById(R.id.iceMiloButton);
+        assert iceMiloButton != null;
         iceMiloButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -61,6 +63,7 @@ public class BeveragesOrderActivity extends AppCompatActivity {
 
         // Mango Jelly
         Button mangoJellyButton = (Button) findViewById(R.id.mangoJellyButton);
+        assert mangoJellyButton != null;
         mangoJellyButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {

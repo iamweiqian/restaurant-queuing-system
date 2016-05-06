@@ -28,7 +28,6 @@ import java.util.StringTokenizer;
 
 public class ViewOrderActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     ListView orderListView;
     private SwipeRefreshLayout swipeContainer;
     private ProgressBar spinner;
@@ -37,13 +36,17 @@ public class ViewOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         spinner=(ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.VISIBLE);
+        if (spinner != null) {
+            spinner.setVisibility(View.VISIBLE);
+        }
 
         orderListView = (ListView) findViewById(R.id.orderListView);
 

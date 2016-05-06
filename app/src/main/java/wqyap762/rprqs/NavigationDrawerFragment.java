@@ -1,10 +1,6 @@
 package wqyap762.rprqs;
 
-
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -27,12 +22,7 @@ import java.util.List;
  */
 public class NavigationDrawerFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
-    private View containerView;
-    private MenuAdapter adapter;
-    private TextView userNameText, userHpnoText;
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -48,14 +38,14 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        userNameText = (TextView) layout.findViewById(R.id.userNameText);
-        userHpnoText = (TextView) layout.findViewById(R.id.userHpnoText);
+        TextView userNameText = (TextView) layout.findViewById(R.id.userNameText);
+        TextView userHpnoText = (TextView) layout.findViewById(R.id.userHpnoText);
         String userName = SaveSharedPreferences.getPrefName(getActivity());
         String userHpno = SaveSharedPreferences.getPrefHpno(getActivity());
         userNameText.setText(userName);
         userHpnoText.setText("+6" + userHpno);
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        adapter = new MenuAdapter(getActivity(), getMenu());
+        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        MenuAdapter adapter = new MenuAdapter(getActivity(), getMenu());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return layout;
@@ -75,8 +65,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
-        containerView = getActivity().findViewById(fragmentId);
-        mDrawerLayout = drawerLayout;
+        View containerView = getActivity().findViewById(fragmentId);
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -90,8 +79,8 @@ public class NavigationDrawerFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerLayout.post(new Runnable() {
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        drawerLayout.post(new Runnable() {
             @Override
             public void run() {
                 mDrawerToggle.syncState();

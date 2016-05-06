@@ -1,11 +1,8 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +15,6 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -29,7 +25,6 @@ import java.util.StringTokenizer;
 
 public class OrderInfomationActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     TextView orderIdText, nameText, hpnoText, foodNameText, quantityText, totalPriceText, orderDateText, orderTimeText, paymentStatusText;
     private ProgressBar spinner;
 
@@ -37,13 +32,17 @@ public class OrderInfomationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_infomation);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         spinner=(ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.VISIBLE);
+        if (spinner != null) {
+            spinner.setVisibility(View.VISIBLE);
+        }
 
         orderIdText = (TextView) findViewById(R.id.orderIdText);
         nameText = (TextView) findViewById(R.id.nameText);
@@ -59,6 +58,7 @@ public class OrderInfomationActivity extends AppCompatActivity {
 
         // customer order quit button
         Button orderDone = (Button) findViewById(R.id.orderDoneButton);
+        assert orderDone != null;
         orderDone.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
