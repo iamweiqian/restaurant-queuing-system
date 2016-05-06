@@ -15,6 +15,7 @@ import java.util.List;
  * Created by wqyap762 on 19/04/16.
  */
 public class OrderAdapter extends ArrayAdapter {
+
     List list = new ArrayList();
     public OrderAdapter(Context context, int resource) {
         super(context, resource);
@@ -41,7 +42,7 @@ public class OrderAdapter extends ArrayAdapter {
         OrderHolder orderHolder;
         if (row == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.row_layout, parent, false);
+            row = layoutInflater.inflate(R.layout.view_row_layout, parent, false);
             orderHolder = new OrderHolder();
             orderHolder.orderIdText = (TextView) row.findViewById(R.id.orderIdText);
             orderHolder.orderInfoText = (TextView) row.findViewById(R.id.orderInfoText);

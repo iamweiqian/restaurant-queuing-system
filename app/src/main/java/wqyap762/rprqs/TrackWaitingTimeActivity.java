@@ -1,19 +1,37 @@
 package wqyap762.rprqs;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.StringTokenizer;
 
 
 public class TrackWaitingTimeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    ListView timeListView;
+    private SwipeRefreshLayout swipeContainer;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +42,77 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
+
+        timeListView = (ListView) findViewById(R.id.timeListView);
+
+        getOrderList();
+
+        swipeToRefresh();
+    }
+
+    public void getOrderList() {
+        final String hpno = SaveSharedPreferences.getPrefHpno(TrackWaitingTimeActivity.this);
+        final TimeAdapter timeAdapter = new TimeAdapter(this, R.layout.view_row_layout);
+        timeListView.setAdapter(timeAdapter);
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray orderList = jsonResponse.getJSONArray("OrderList");
+
+                    for (int i = 0; i < orderList.length(); i++) {
+                        JSONObject object = orderList.getJSONObject(i);
+                        final String order_id = object.getString("order_id");
+                        String food_name = object.getString("food_name");
+                        String payment_status = object.getString("payment_status");
+                        String ordered_on = object.getString("ordered_on");
+                        StringTokenizer tokenizer = new StringTokenizer(ordered_on);
+                        String ordered_date = tokenizer.nextToken();
+                        String waiting_time = object.getString("waiting_time");
+
+                        Time time = new Time(order_id, food_name, payment_status, ordered_date, waiting_time);
+                        timeAdapter.add(time);
+
+                        timeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                ViewGroup vg = (ViewGroup) view;
+                                TextView textView = (TextView) vg.findViewById(R.id.orderIdText);
+                                Intent intent = new Intent(TrackWaitingTimeActivity.this, OrderInfomationActivity.class);
+                                intent.putExtra("order_id", textView.getText().toString());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                    timeAdapter.notifyDataSetChanged();
+                    spinner.setVisibility(View.GONE);
+                    swipeContainer.setRefreshing(false);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        TrackWaitingTimeRequest trackWaitingTimeRequest = new TrackWaitingTimeRequest(hpno, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(TrackWaitingTimeActivity.this);
+        queue.add(trackWaitingTimeRequest);
+    }
+
+    public void swipeToRefresh() {
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getOrderList();
+            }
+        });
+
+        swipeContainer.setColorSchemeColors(Color.GRAY);
     }
 
     @Override
