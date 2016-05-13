@@ -26,6 +26,7 @@
 			<th width="48">No.</th>
 			<th width="82">Order ID</th>
 			<th width="120">Customer's Name</th>
+			<th width="100">Phone No.</th>
 			<th width="196">Food Name</th>
 			<th width="83">Quantity</th>
 			<th width="104">Total Price (RM)</th>
@@ -38,7 +39,7 @@
     		require "init.php";
     		$order_id = $_POST['order_id'];
 
-   			$sql = "SELECT o.*, u.name, m.food_name FROM `Order` o INNER JOIN `User` u ON o.FK_hpno = u.hpno INNER JOIN `Menu` m ON o.FK_menu_id = m.menu_id WHERE order_id LIKE '$order_id'";
+   			$sql = "SELECT o.*, u.hpno, u.name, m.food_name FROM `Order` o INNER JOIN `User` u ON o.FK_hpno = u.hpno INNER JOIN `Menu` m ON o.FK_menu_id = m.menu_id WHERE order_id LIKE '$order_id'";
    			$result = mysqli_query($con, $sql) or die("Error: ".mysqli_error($con));
 
     		while ($row = mysqli_fetch_array($result)) {
@@ -48,6 +49,7 @@
           			<td><?php echo $i;?></td>
           			<td><?php echo $row{'order_id'};?></td>
           			<td><?php echo $row{'name'};?></td>
+          			<td><?php echo $row{'hpno'};?></td>
           			<td style="text-align:left"><?php echo $row{'food_name'};?></td>
           			<td><?php echo $row{'quantity'};?></td>
           			<td><?php echo $row{'total_price'};?></td>
