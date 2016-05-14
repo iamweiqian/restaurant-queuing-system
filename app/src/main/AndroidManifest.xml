@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="wqyap762.rprqs" >
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    package="wqyap762.rprqs">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo2"
         android:label="RPRQS"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,12 +21,11 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="Log in" >
-        </activity>
+            android:label="Log in"/>
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register_account"
-            android:parentActivityName=".LoginActivity" >
+            android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.LoginActivity" />
@@ -33,19 +33,18 @@
         <activity
             android:name=".OrderFoodActivity"
             android:label="@string/title_activity_order_food"
-            android:parentActivityName=".CustomerMainActivity" >
+            android:parentActivityName=".CustomerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.CustomerMainActivity" />
         </activity>
         <activity
             android:name=".CustomerMainActivity"
-            android:label="@string/title_activity_customer_main" >
-        </activity>
+            android:label="@string/title_activity_customer_main"/>
         <activity
             android:name=".SetOrderActivity"
             android:label="@string/title_activity_set_order"
-            android:parentActivityName=".OrderFoodActivity" >
+            android:parentActivityName=".OrderFoodActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
@@ -53,7 +52,7 @@
         <activity
             android:name=".RiceOrderActivity"
             android:label="@string/title_activity_rice_order"
-            android:parentActivityName=".OrderFoodActivity" >
+            android:parentActivityName=".OrderFoodActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
@@ -61,7 +60,7 @@
         <activity
             android:name=".NoodlesOrderActivity"
             android:label="@string/title_activity_noodles_order"
-            android:parentActivityName=".OrderFoodActivity" >
+            android:parentActivityName=".OrderFoodActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
@@ -69,7 +68,7 @@
         <activity
             android:name=".BeveragesOrderActivity"
             android:label="@string/title_activity_beverages_order"
-            android:parentActivityName=".OrderFoodActivity" >
+            android:parentActivityName=".OrderFoodActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
@@ -77,7 +76,7 @@
         <activity
             android:name=".DessertsOrderActivity"
             android:label="@string/title_activity_desserts_order"
-            android:parentActivityName=".OrderFoodActivity" >
+            android:parentActivityName=".OrderFoodActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
@@ -85,7 +84,7 @@
         <activity
             android:name=".FruitJuiceOrderActivity"
             android:label="@string/title_activity_fruit_juice_order"
-            android:parentActivityName=".OrderFoodActivity" >
+            android:parentActivityName=".OrderFoodActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.OrderFoodActivity" />
@@ -93,7 +92,7 @@
         <activity
             android:name=".ItemActivity"
             android:label="@string/title_activity_item"
-            android:parentActivityName=".SetOrderActivity" >
+            android:parentActivityName=".SetOrderActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.SetOrderActivity" />
@@ -101,7 +100,7 @@
         <activity
             android:name=".ViewOrderActivity"
             android:label="@string/title_activity_view_order"
-            android:parentActivityName=".CustomerMainActivity" >
+            android:parentActivityName=".CustomerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.CustomerMainActivity" />
@@ -109,7 +108,7 @@
         <activity
             android:name=".OrderInfomationActivity"
             android:label="@string/title_activity_order_information"
-            android:parentActivityName=".ViewOrderActivity" >
+            android:parentActivityName=".ViewOrderActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ViewOrderActivity" />
@@ -117,11 +116,14 @@
         <activity
             android:name=".TrackWaitingTimeActivity"
             android:label="@string/title_activity_track_waiting_time"
-            android:parentActivityName=".CustomerMainActivity" >
+            android:parentActivityName=".CustomerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="wqyap762.rprqs.CustomerMainActivity" />
         </activity>
+        <activity
+            android:name=".NoticeActivity"
+            android:label="@string/title_activity_notice"/>
     </application>
 
 </manifest>

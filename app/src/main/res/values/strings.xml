@@ -24,6 +24,7 @@
     <string name="title_activity_order_information">Order Information</string>
     <string name="LogOutButton">Log out</string>
     <string name="title_activity_track_waiting_time">Order List</string>
+    <string name="title_activity_notice">Notice</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 

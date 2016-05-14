@@ -31,7 +31,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class ItemActivity extends AppCompatActivity {
@@ -66,18 +68,32 @@ public class ItemActivity extends AppCompatActivity {
 
         new downloadImage().execute();
         getMenu();
-
         totalPriceCalculated();
+        operatingHours();
+
+
+    }
+
+    private void operatingHours() {
+        Calendar now = Calendar.getInstance();
+
+        int hour = now.get(Calendar.HOUR);
+        int minute = now.get(Calendar.MINUTE);
+
+        Date time = parseDate(hour + ":" + minute);
+        String compareStartTime = "10:00";
+        Date startTime = parseDate(compareStartTime);
+        String compareEndTime = "22:00";
+        Date endTime = parseDate(compareEndTime);
 
         // customer order
         Button orderButton = (Button) findViewById(R.id.orderButton);
-        assert orderButton != null;
-        orderButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(final View v) {
-                        if (TextUtils.isEmpty(quantityText.getText().toString())) {
-                            quantityText.setError("Please enter quantity.");
-                        } else {
+
+        if (startTime.before(time) && endTime.after(time)) {
+            assert orderButton != null;
+            orderButton.setOnClickListener(
+                    new Button.OnClickListener() {
+                        public void onClick(final View v) {
                             final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(ItemActivity.this);
 
                             // setting dialog title
@@ -111,8 +127,22 @@ public class ItemActivity extends AppCompatActivity {
                             orderConfirm.show();
                         }
                     }
-                }
-        );
+            );
+        } else {
+            if (orderButton != null) {
+                orderButton.setEnabled(false);
+            }
+        }
+    }
+
+    private Date parseDate(String date) {
+        final String inputFormat = "HH:mm";
+        SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat, Locale.getDefault());
+        try {
+            return inputParser.parse(date);
+        } catch (java.text.ParseException e) {
+            return new Date(0);
+        }
     }
 
     public class downloadImage extends AsyncTask<Void, Void, Bitmap> {
@@ -183,9 +213,9 @@ public class ItemActivity extends AppCompatActivity {
         quantity = quantity + 1;
         if (quantity > 10) {
             quantity = 10;
-            display(quantity);
+            displayQuantity(quantity);
         } else {
-            display(quantity);
+            displayQuantity(quantity);
         }
     }
 
@@ -193,13 +223,13 @@ public class ItemActivity extends AppCompatActivity {
         quantity = quantity - 1;
         if (quantity <= 0) {
             quantity = 0;
-            display(quantity);
+            displayQuantity(quantity);
         } else {
-            display(quantity);
+            displayQuantity(quantity);
         }
     }
 
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView displayQuantity = (TextView) findViewById(R.id.quantityText);
         assert displayQuantity != null;
         displayQuantity.setText(String.valueOf(number));
