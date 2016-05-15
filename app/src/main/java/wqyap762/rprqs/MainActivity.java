@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private void operatingHours() {
         Calendar now = Calendar.getInstance();
 
-        int hour = now.get(Calendar.HOUR);
+        int hour = now.get(Calendar.HOUR_OF_DAY);
         int minute = now.get(Calendar.MINUTE);
 
         final Date time = parseDate(hour + ":" + minute);

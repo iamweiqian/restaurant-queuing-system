@@ -5,14 +5,14 @@ package wqyap762.rprqs;
  */
 public class Time {
 
-    private String order_id, payment_status, food_name, ordered_on, waiting_time;
+    private String order_id, payment_status, food_name, ordered_on, ready_time;
 
-    public Time(String order_id, String food_name, String payment_status, String ordered_on, String waiting_time) {
+    public Time(String order_id, String food_name, String payment_status, String ordered_on, String ready_time) {
         this.setOrder_id(order_id);
         this.setFood_name(food_name);
         this.setPayment_status(payment_status);
         this.setOrdered_on(ordered_on);
-        this.setWaiting_time(waiting_time);
+        this.setReady_time(ready_time);
     }
 
     public String getOrder_id() {
@@ -47,11 +47,11 @@ public class Time {
         this.ordered_on = ordered_on;
     }
 
-    public String getWaiting_time() {
-        return waiting_time;
+    public String getReady_time() {
+        return ready_time;
     }
 
-    public void setWaiting_time(String waiting_time) {
-        this.waiting_time = waiting_time;
+    public void setReady_time(String ready_time) {
+        this.ready_time = ready_time;
     }
 }

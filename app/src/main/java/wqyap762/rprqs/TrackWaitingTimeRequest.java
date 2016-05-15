@@ -11,11 +11,11 @@ import java.util.Map;
  * Created by wqyap762 on 06/05/16.
  */
 public class TrackWaitingTimeRequest extends StringRequest {
-    private static final String VIEW_ORDER_REQUEST_URL = "http://rprqs.16mb.com/ViewOrderRequest.php";
+    private static final String TRACK_ORDER_REQUEST_URL = "http://rprqs.16mb.com/TrackOrderRequest.php";
     private Map<String, String> params;
 
     public TrackWaitingTimeRequest(String hpno, Response.Listener<String> listener) {
-        super(Request.Method.POST, VIEW_ORDER_REQUEST_URL, listener, null);
+        super(Request.Method.POST, TRACK_ORDER_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("hpno", hpno);
     }

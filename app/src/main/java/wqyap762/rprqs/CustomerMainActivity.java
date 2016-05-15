@@ -40,24 +40,24 @@ public class CustomerMainActivity extends AppCompatActivity {
                 }
         );
 
-        // view order customer button
-        Button viewOrderCustomerButton = (Button) findViewById(R.id.viewOrderCustomerButton);
-        assert viewOrderCustomerButton != null;
-        viewOrderCustomerButton.setOnClickListener(
+        // track waiting time customer button
+        Button trackWaitingTimeButton = (Button) findViewById(R.id.trackWaitingTimeButton);
+        assert trackWaitingTimeButton != null;
+        trackWaitingTimeButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToViewOrderActivity();
+                        goToTrackWaitingTimeActivity();
                     }
                 }
         );
 
-        // track waiting time customer button
-        Button trackWaitingTimeCustomerButton = (Button) findViewById(R.id.trackWaitingTimeCustomerButton);
-        assert trackWaitingTimeCustomerButton != null;
-        trackWaitingTimeCustomerButton.setOnClickListener(
+        // view order customer button
+        Button viewOrderButton = (Button) findViewById(R.id.viewOrderButton);
+        assert viewOrderButton != null;
+        viewOrderButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToTrackWaitingTimeActivity();
+                        goToViewOrderActivity();
                     }
                 }
         );
@@ -166,13 +166,13 @@ public class CustomerMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToViewOrderActivity() {
-        Intent intent = new Intent(this, ViewOrderActivity.class);
+    public void goToTrackWaitingTimeActivity() {
+        Intent intent = new Intent(this, TrackWaitingTimeActivity.class);
         startActivity(intent);
     }
 
-    public void goToTrackWaitingTimeActivity() {
-        Intent intent = new Intent(this, TrackWaitingTimeActivity.class);
+    public void goToViewOrderActivity() {
+        Intent intent = new Intent(this, ViewOrderActivity.class);
         startActivity(intent);
     }
 }

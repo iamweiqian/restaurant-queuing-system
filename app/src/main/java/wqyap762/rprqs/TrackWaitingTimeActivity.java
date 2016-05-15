@@ -1,10 +1,18 @@
 package wqyap762.rprqs;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +31,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 
@@ -76,9 +88,12 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
                         String ordered_on = object.getString("ordered_on");
                         StringTokenizer tokenizer = new StringTokenizer(ordered_on);
                         String ordered_date = tokenizer.nextToken();
-                        String waiting_time = object.getString("waiting_time");
+                        String ready_on = object.getString("ready_on");
+                        StringTokenizer tokenizer1 = new StringTokenizer(ready_on);
+                        String ready_date = tokenizer1.nextToken();
+                        String ready_time = tokenizer1.nextToken();
 
-                        Time time = new Time(order_id, food_name, payment_status, ordered_date, waiting_time);
+                        Time time = new Time(order_id, food_name, payment_status, ordered_date, ready_time);
                         timeAdapter.add(time);
 
                         timeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,11 +115,29 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
                 }
             }
         };
-
         TrackWaitingTimeRequest trackWaitingTimeRequest = new TrackWaitingTimeRequest(hpno, responseListener);
         RequestQueue queue = Volley.newRequestQueue(TrackWaitingTimeActivity.this);
         queue.add(trackWaitingTimeRequest);
     }
+
+    /*public void readyAlert() {
+        Intent intent = new Intent();
+        PendingIntent pendingIntent = PendingIntent.getActivities(TrackWaitingTimeActivity.this, 0, new Intent[]{intent}, 0);
+        Notification notification = new Notification.Builder(TrackWaitingTimeActivity.this)
+                .setTicker("TickerTitle")
+                .setContentTitle("Alert")
+                .setContentText("Your order is ready.")
+                .setSmallIcon(R.drawable.logoweb)
+                .setContentIntent(pendingIntent).getNotification();
+
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+        notification.flags = Notification.DEFAULT_SOUND;
+        notification.flags = Notification.DEFAULT_VIBRATE;
+        notification.flags = Notification.DEFAULT_LIGHTS;
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(0, notification);
+
+    }*/
 
     public void swipeToRefresh() {
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);

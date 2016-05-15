@@ -77,7 +77,7 @@ public class ItemActivity extends AppCompatActivity {
     private void operatingHours() {
         Calendar now = Calendar.getInstance();
 
-        int hour = now.get(Calendar.HOUR);
+        int hour = now.get(Calendar.HOUR_OF_DAY);
         int minute = now.get(Calendar.MINUTE);
 
         Date time = parseDate(hour + ":" + minute);
@@ -263,9 +263,12 @@ public class ItemActivity extends AppCompatActivity {
         final String payment_status = "Unpaid";
         final String hpno = SaveSharedPreferences.getPrefHpno(ItemActivity.this);
         final String menu_id = intent.getStringExtra("menu_id");
-        final Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String ordered_on = simpleDateFormat.format(now);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        String ordered_on = simpleDateFormat.format(calendar.getTime());
+        calendar.add(Calendar.MINUTE, 5);
+        String ready_on = simpleDateFormat.format(calendar.getTime());
 
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -291,7 +294,7 @@ public class ItemActivity extends AppCompatActivity {
             }
         };
 
-        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, hpno, menu_id, ordered_on, responseListener);
+        OrderRequest orderRequest = new OrderRequest(total_price, quantity, payment_status, hpno, menu_id, ordered_on, ready_on, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
         queue.add(orderRequest);
     }
@@ -313,7 +316,7 @@ public class ItemActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // user press Proceed button. Write logic here
-                goToViewOrderActivity();
+                goToTrackOrderActivity();
             }
         });
         orderDone.show();
@@ -345,8 +348,8 @@ public class ItemActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToViewOrderActivity() {
-        Intent intent = new Intent(this, ViewOrderActivity.class);
+    public void goToTrackOrderActivity() {
+        Intent intent = new Intent(this, TrackWaitingTimeActivity.class);
         startActivity(intent);
     }
 }

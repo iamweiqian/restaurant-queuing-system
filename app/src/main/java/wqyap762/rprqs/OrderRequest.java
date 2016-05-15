@@ -15,7 +15,7 @@ public class OrderRequest extends StringRequest{
     private static final String ORDER_REQUEST_URL = "http://rprqs.16mb.com/OrderFoodRequest.php";
     private Map<String, String> params;
 
-    public OrderRequest(Double total_price, int quantity, String payment_status, String hpno, String menu_id, String ordered_on, Response.Listener<String> listener) {
+    public OrderRequest(Double total_price, int quantity, String payment_status, String hpno, String menu_id, String ordered_on, String ready_on, Response.Listener<String> listener) {
         super(Request.Method.POST, ORDER_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("total_price", String.valueOf(total_price));
@@ -23,7 +23,8 @@ public class OrderRequest extends StringRequest{
         params.put("payment_status", payment_status);
         params.put("hpno", hpno);
         params.put("menu_id", menu_id);
-        params.put("ordered_on", ordered_on + "");
+        params.put("ordered_on", ordered_on);
+        params.put("ready_on", ready_on + "");
     }
 
     @Override
