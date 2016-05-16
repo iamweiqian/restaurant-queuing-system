@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by wqyap762 on 15/04/16.
  */
 public class ItemRequest extends StringRequest {
-    private static final String ITEM_REQUEST_URL = "http://rprqs.16mb.com/ItemRequest.php";
+    private static final String ITEM_REQUEST_URL = "http://rprqs.16mb.com/item_request.php";
     private Map<String, String> params;
 
     public ItemRequest(String menu_id, Response.Listener<String> listener) {

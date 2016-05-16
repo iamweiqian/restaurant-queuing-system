@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by wqyap762 on 13/04/16.
  */
 public class RegisterRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "http://rprqs.16mb.com/RegisterRequest.php";
+    private static final String REGISTER_REQUEST_URL = "http://rprqs.16mb.com/register_request.php";
     private Map<String, String> params;
 
     public RegisterRequest(String hpno, String password, String name, int user_state, Response.Listener<String> listener) {
