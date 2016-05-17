@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by wqyap762 on 15/04/16.
  */
 public class ViewOrderRequest extends StringRequest {
-    private static final String VIEW_ORDER_REQUEST_URL = "http://rprqs.16mb.com/view_request.php";
+    private static final String VIEW_ORDER_REQUEST_URL = "http://188.166.178.66/view_request.php";
     private Map<String, String> params;
 
     public ViewOrderRequest(String hpno, Response.Listener<String> listener) {

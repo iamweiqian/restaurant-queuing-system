@@ -13,7 +13,7 @@ if (!$result) {
 	array_push($response, array("code"=>$code, "message"=>$message));
 	echo json_encode(array("server_response"=>$response));
 } else {
-	header("Location: http://rprqs.16mb.com/");
+	header("Location: http://188.166.178.66/rprqs_index.php");
 	exit;
 }
 mysqli_close($con);

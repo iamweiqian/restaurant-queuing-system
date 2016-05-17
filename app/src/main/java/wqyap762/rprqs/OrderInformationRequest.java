@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by wqyap762 on 16/04/16.
  */
 public class OrderInformationRequest extends StringRequest {
-    private static final String ORDER_INFORMATION_REQUEST_URL = "http://rprqs.16mb.com/information_request.php";
+    private static final String ORDER_INFORMATION_REQUEST_URL = "http://188.166.178.66/information_request.php";
     private Map<String, String> params;
 
     public OrderInformationRequest(String order_id, String hpno, Response.Listener<String> listener) {

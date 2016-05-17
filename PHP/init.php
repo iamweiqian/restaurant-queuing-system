@@ -1,8 +1,8 @@
 <?php
-$host = "mysql.hostinger.my";
-$user = "u197760149_admin";
-$password = "Ab123456";
-$db = "u197760149_rprqs";
+$host = "Localhost";
+$user = "root";
+$password = "7W6Q2Y3a2p3";
+$db = "rprqs";
 
 $con = mysqli_connect($host, $user, $password, $db);
 if (!$con) {

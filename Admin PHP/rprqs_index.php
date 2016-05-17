@@ -31,10 +31,10 @@
         <li class="active"><a href="rprqs_index.php">Order</a></li>
         <li><a href="sales.php">Sales</a></li>
       </ul>
-      <h3 class="text-muted">Restaurant Parit Raja</h3>
+      <h3 class="text-muted">Restaurant Parit Raja Management System</h3>
     </div>
 
-    <form action="UpdatePayment.php" method="post">
+    <form action="update.php" method="post">
       <table class="center">
         <tr>
           <td>Order ID: </td>

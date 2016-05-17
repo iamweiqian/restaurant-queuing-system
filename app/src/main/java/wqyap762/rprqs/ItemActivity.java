@@ -81,7 +81,7 @@ public class ItemActivity extends AppCompatActivity {
         int minute = now.get(Calendar.MINUTE);
 
         Date time = parseDate(hour + ":" + minute);
-        String compareStartTime = "10:00";
+        String compareStartTime = "08:00";
         Date startTime = parseDate(compareStartTime);
         String compareEndTime = "22:00";
         Date endTime = parseDate(compareEndTime);
@@ -152,7 +152,7 @@ public class ItemActivity extends AppCompatActivity {
         @Override
         protected Bitmap doInBackground(Void... params) {
             try {
-                URL imageURL = new URL("http://rprqs.16mb.com/image/" + menu_id + ".jpg");
+                URL imageURL = new URL("http://188.166.178.66/image/" + menu_id + ".jpg");
                 return BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();

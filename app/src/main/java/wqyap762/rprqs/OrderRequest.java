@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by wqyap762 on 14/04/16.
  */
 public class OrderRequest extends StringRequest{
-    private static final String ORDER_REQUEST_URL = "http://rprqs.16mb.com/OrderFoodRequest.php";
+    private static final String ORDER_REQUEST_URL = "http://188.166.178.66/order_request.php";
     private Map<String, String> params;
 
     public OrderRequest(Double total_price, int quantity, String payment_status, String hpno, String menu_id, String ordered_on, String ready_on, Response.Listener<String> listener) {

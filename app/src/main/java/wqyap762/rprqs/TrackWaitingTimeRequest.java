@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by wqyap762 on 06/05/16.
  */
 public class TrackWaitingTimeRequest extends StringRequest {
-    private static final String TRACK_ORDER_REQUEST_URL = "http://rprqs.16mb.com/track_request.php";
+    private static final String TRACK_ORDER_REQUEST_URL = "http://188.166.178.66/track_request.php";
     private Map<String, String> params;
 
     public TrackWaitingTimeRequest(String hpno, Response.Listener<String> listener) {

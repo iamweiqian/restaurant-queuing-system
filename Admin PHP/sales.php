@@ -73,7 +73,7 @@ $resultList = mysqli_query($con, $sql) or die("Error: ".mysqli_error($con));
         <li><a href="rprqs_index.php">Order</a></li>
         <li class="active"><a href="sales.php">Sales</a></li>
       </ul>
-      <h3 class="text-muted">Restaurant Parit Raja</h3>
+      <h3 class="text-muted">Restaurant Parit Raja Management System</h3>
     </div>
 
     <div class="jumbotron">
