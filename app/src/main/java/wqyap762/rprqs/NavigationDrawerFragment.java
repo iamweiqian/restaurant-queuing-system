@@ -53,8 +53,8 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static List<Menu> getMenu() {
         List<Menu> menu = new ArrayList<>();
-        int[] icons = {R.drawable.ic_action_order, R.drawable.ic_action_view, R.drawable.ic_action_track};
-        String[] titles = {"Order Food", "View Order", "Track Order"};
+        int[] icons = {R.drawable.ic_action_order, R.drawable.ic_action_track, R.drawable.ic_action_view};
+        String[] titles = {"Order Food", "Track Order", "View Order"};
         for (int i = 0; i < icons.length && i < titles.length; i++) {
             Menu current = new Menu();
             current.iconId = icons[i];

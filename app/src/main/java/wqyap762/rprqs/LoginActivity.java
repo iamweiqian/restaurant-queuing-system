@@ -102,18 +102,17 @@ public class LoginActivity extends AppCompatActivity {
                         LoginActivity.this.startActivity(intent);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                        builder.setMessage("Login Failed")
+                        builder.setMessage("Incorrect username or password.")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
+                        spinner.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
-
-
         LoginRequest loginRequest = new LoginRequest(hpno, password, responseListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(loginRequest);

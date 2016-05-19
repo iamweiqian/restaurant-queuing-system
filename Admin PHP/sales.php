@@ -42,15 +42,13 @@ $resultList = mysqli_query($con, $sql) or die("Error: ".mysqli_error($con));
   // draws it.
   function drawChart() {
 
+    // Create the data table.
     var data = google.visualization.arrayToDataTable([
       ['Food Name', 'Quantity'],
       <?php foreach($resultList as $result) : ?>
       ['<?php echo $result['food_name'];?>', <?php echo $result['quantity'];?>],
       <?php endforeach; ?>
     ]);
-
-    // Create the data table.
-
 
     // Set chart options
     var options = {'title':"Today's Sales",

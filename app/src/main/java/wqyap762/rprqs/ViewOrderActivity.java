@@ -113,7 +113,6 @@ public class ViewOrderActivity extends AppCompatActivity {
                 getOrderList();
             }
         });
-
         swipeContainer.setColorSchemeColors(Color.GRAY);
     }
 

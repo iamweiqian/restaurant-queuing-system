@@ -67,7 +67,7 @@ public class ItemActivity extends AppCompatActivity {
         quantityText = (TextView) findViewById(R.id.quantityText);
 
         new downloadImage().execute();
-        getMenu();
+        getItemInformation();
         totalPriceCalculated();
         operatingHours();
 
@@ -101,9 +101,6 @@ public class ItemActivity extends AppCompatActivity {
 
                             // setting dialog message
                             orderConfirm.setMessage("Do you want to continue?");
-
-                            // setting icon to dialog
-                            //orderConfirm.setIcon(R.drawable.save);
 
                             // setting positive "Proceed" button
                             orderConfirm.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
@@ -171,7 +168,7 @@ public class ItemActivity extends AppCompatActivity {
         }
     }
 
-    public void getMenu() {
+    public void getItemInformation() {
         Intent intent = getIntent();
         String menu_id = intent.getStringExtra("menu_id");
 
@@ -281,12 +278,14 @@ public class ItemActivity extends AppCompatActivity {
 
                     if (success) {
                         orderDone();
+                        spinner.setVisibility(View.GONE);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
                         builder.setMessage("Order Failed")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
+                        spinner.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

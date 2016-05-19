@@ -120,25 +120,6 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
         queue.add(trackWaitingTimeRequest);
     }
 
-    /*public void readyAlert() {
-        Intent intent = new Intent();
-        PendingIntent pendingIntent = PendingIntent.getActivities(TrackWaitingTimeActivity.this, 0, new Intent[]{intent}, 0);
-        Notification notification = new Notification.Builder(TrackWaitingTimeActivity.this)
-                .setTicker("TickerTitle")
-                .setContentTitle("Alert")
-                .setContentText("Your order is ready.")
-                .setSmallIcon(R.drawable.logoweb)
-                .setContentIntent(pendingIntent).getNotification();
-
-        notification.flags = Notification.FLAG_AUTO_CANCEL;
-        notification.flags = Notification.DEFAULT_SOUND;
-        notification.flags = Notification.DEFAULT_VIBRATE;
-        notification.flags = Notification.DEFAULT_LIGHTS;
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);
-
-    }*/
-
     public void swipeToRefresh() {
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -147,7 +128,6 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
                 getOrderList();
             }
         });
-
         swipeContainer.setColorSchemeColors(Color.GRAY);
     }
 
