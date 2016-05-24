@@ -113,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                             } else {
                                 passwordText.setText("");
                                 confirmPasswordText.setText("");
-                                confirmPasswordText.setError("Your password does not match!");
+                                confirmPasswordText.setError("Your passwords do not match!");
                             }
                         }
                     }

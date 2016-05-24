@@ -98,8 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                         SaveSharedPreferences.setPrefHpno(LoginActivity.this, hpno);
                         SaveSharedPreferences.setPrefName(LoginActivity.this, name);
 
-                        Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
-                        LoginActivity.this.startActivity(intent);
+                        goToCustomerMainActivity();
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                         builder.setMessage("Incorrect username or password.")
@@ -152,6 +151,11 @@ public class LoginActivity extends AppCompatActivity {
             closeButton.show();
         }
         return super.onKeyDown(keycode, event);
+    }
+
+    public void goToCustomerMainActivity() {
+        Intent intent = new Intent(this, CustomerMainActivity.class);
+        startActivity(intent);
     }
 
     public void goToRegisterActivity() {

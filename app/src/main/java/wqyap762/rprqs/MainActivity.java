@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
         int minute = now.get(Calendar.MINUTE);
 
         final Date time = parseDate(hour + ":" + minute);
-        String compareStartTime = "08:00";
+        String compareStartTime = "10:00";
         final Date startTime = parseDate(compareStartTime);
-        String compareEndTime = "22:00";
+        String compareEndTime = "21:00";
         final Date endTime = parseDate(compareEndTime);
 
         new  Handler().postDelayed(new Runnable() {

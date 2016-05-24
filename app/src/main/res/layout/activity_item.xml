@@ -80,7 +80,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
-            android:id="@+id/decrease"
+            android:id="@+id/decreaseButton"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_column="0"
@@ -99,12 +99,12 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="6dp"
             android:layout_row="8"
-            android:text="0"
+            android:text="1"
             android:textSize="30sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/increase"
+            android:id="@+id/increaseButton"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_row="8"

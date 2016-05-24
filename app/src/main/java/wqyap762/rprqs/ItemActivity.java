@@ -40,8 +40,9 @@ public class ItemActivity extends AppCompatActivity {
 
     ImageView itemImage;
     TextView foodNameText, descriptionText, basicPriceText, totalPriceText, quantityText;
+    Button decreaseButton, increaseButton;
     private ProgressBar spinner;
-    int quantity = 0;
+    int quantity = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,14 @@ public class ItemActivity extends AppCompatActivity {
         basicPriceText = (TextView) findViewById(R.id.basicPriceText);
         totalPriceText = (TextView) findViewById(R.id.totalPriceText);
         quantityText = (TextView) findViewById(R.id.quantityText);
+        decreaseButton = (Button) findViewById(R.id.decreaseButton);
+        increaseButton = (Button) findViewById(R.id.increaseButton);
 
+        decreaseButton.setEnabled(false);
         new downloadImage().execute();
         getItemInformation();
         totalPriceCalculated();
         operatingHours();
-
-
     }
 
     private void operatingHours() {
@@ -81,9 +83,9 @@ public class ItemActivity extends AppCompatActivity {
         int minute = now.get(Calendar.MINUTE);
 
         Date time = parseDate(hour + ":" + minute);
-        String compareStartTime = "08:00";
+        String compareStartTime = "10:00";
         Date startTime = parseDate(compareStartTime);
-        String compareEndTime = "22:00";
+        String compareEndTime = "21:00";
         Date endTime = parseDate(compareEndTime);
 
         // customer order
@@ -207,9 +209,12 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     public void increaseInteger(View view) {
+        decreaseButton.setEnabled(true);
         quantity = quantity + 1;
-        if (quantity > 10) {
-            quantity = 10;
+        if (quantity >= 10) {
+            if (increaseButton != null) {
+                increaseButton.setEnabled(false);
+            }
             displayQuantity(quantity);
         } else {
             displayQuantity(quantity);
@@ -217,9 +222,12 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     public void decreaseInteger(View view) {
+        increaseButton.setEnabled(true);
         quantity = quantity - 1;
-        if (quantity <= 0) {
-            quantity = 0;
+        if (quantity <= 1) {
+            if (decreaseButton != null) {
+                decreaseButton.setEnabled(false);
+            }
             displayQuantity(quantity);
         } else {
             displayQuantity(quantity);
@@ -302,7 +310,7 @@ public class ItemActivity extends AppCompatActivity {
         AlertDialog.Builder orderDone = new AlertDialog.Builder(ItemActivity.this);
 
         // setting dialog title
-        orderDone.setTitle("Order Successfully!");
+        orderDone.setTitle("Ordered Successfully!");
 
         // setting dialog message
         orderDone.setMessage("Your order has been placed successfully.");
