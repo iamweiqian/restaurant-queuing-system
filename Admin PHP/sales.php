@@ -41,7 +41,6 @@ $resultList = mysqli_query($con, $sql) or die("Error: ".mysqli_error($con));
   // instantiates the pie chart, passes in the data and
   // draws it.
   function drawChart() {
-
     // Create the data table.
     var data = google.visualization.arrayToDataTable([
       ['Food Name', 'Quantity'],

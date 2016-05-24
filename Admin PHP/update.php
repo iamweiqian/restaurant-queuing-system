@@ -76,7 +76,7 @@
 						<td><?php echo $row{'hpno'};?></td>
 						<td style="text-align:left"><?php echo $row{'food_name'};?></td>
 						<td><?php echo $row{'quantity'};?></td>
-						<td><?php echo $row{'total_price'};?></td>
+						<td><?php echo number_format((float)$row{'total_price'}, 2, '.', '');?></td>
 						<td><?php echo $row{'ordered_on'};?></td>
 						<td><input type="radio" name="payment_status" <?php if($row['payment_status']=="Unpaid") {echo "checked";}?> value="Unpaid">Unpaid
 							<input type="radio" name="payment_status" <?php if($row['payment_status']=="Paid") {echo "checked";}?> value="Paid">Paid

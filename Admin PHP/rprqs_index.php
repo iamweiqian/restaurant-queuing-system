@@ -1,3 +1,8 @@
+<?php
+$page = $_SERVER['PHP_SELF'];
+$sec = "10";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +68,7 @@
         require "init.php";
         $order_id = $_POST['order_id'];
 
-        $sql = "SELECT o.*, u.hpno, u.name, m.food_name FROM `Order` o INNER JOIN `User` u ON o.FK_hpno = u.hpno INNER JOIN `Menu` m ON o.FK_menu_id = m.menu_id WHERE DATE(`ordered_on`) = CURDATE() ORDER BY order_id DESC ";
+        $sql = "SELECT o.*, u.hpno, u.name, m.food_name FROM `Order` o INNER JOIN `User` u ON o.FK_hpno = u.hpno INNER JOIN `Menu` m ON o.FK_menu_id = m.menu_id WHERE DATE(`ordered_on`) = CURDATE() AND o.payment_status = 'Unpaid' ORDER BY order_id DESC ";
         $result = mysqli_query($con, $sql) or die("Error: ".mysqli_error($con));
 
         while ($row = mysqli_fetch_array($result)) {
@@ -76,12 +81,26 @@
             <td><?php echo $row{'hpno'};?></td>
             <td style="text-align:left"><?php echo $row{'food_name'};?></td>
             <td><?php echo $row{'quantity'};?></td>
-            <td><?php echo $row{'total_price'};?></td>
+            <td><?php echo number_format((float)$row{'total_price'}, 2, '.', '');?></td>
             <td><?php echo $row{'ordered_on'};?></td>
             <td><?php echo $row{'payment_status'};?></td>
           </tr>
           <?php }
           ?>
+          <?php
+          require "init.php";
+
+          $sql = "SELECT ROUND(SUM(total_price)) AS total_price FROM `Order` WHERE DATE(`ordered_on`) = CURDATE()";
+          $result = mysqli_query($con, $sql) or die("Error: ".mysqli_error($con));
+
+          while ($row = mysqli_fetch_array($result)) {
+            ?>
+            <tr>
+              <td style="text-align:right" colspan="6">Total Sales:</td>
+              <td><?php echo number_format((float)$row{'total_price'}, 2, '.', '');?></td>
+            </tr>
+            <?php }
+            ?>
         </table>
       </form>
 
