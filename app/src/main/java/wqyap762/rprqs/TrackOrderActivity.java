@@ -1,18 +1,16 @@
 package wqyap762.rprqs;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,14 +29,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.StringTokenizer;
 
 
-public class TrackWaitingTimeActivity extends AppCompatActivity {
+public class TrackOrderActivity extends AppCompatActivity {
 
     ListView timeListView;
     private SwipeRefreshLayout swipeContainer;
@@ -62,13 +56,28 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
 
         timeListView = (ListView) findViewById(R.id.timeListView);
 
-        getOrderList();
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo!=null && networkInfo.isConnected()) {
+            getOrderList();
+        } else {
+            AlertDialog.Builder networkNotFound = new AlertDialog.Builder(TrackOrderActivity.this);
+            networkNotFound.setTitle("Network Error");
+            networkNotFound.setMessage("Please check your internet connection.");
+            networkNotFound.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    NavUtils.navigateUpFromSameTask(TrackOrderActivity.this);
+                }
+            });
+            networkNotFound.show();
+        }
 
         swipeToRefresh();
     }
 
     public void getOrderList() {
-        final String hpno = SaveSharedPreferences.getPrefHpno(TrackWaitingTimeActivity.this);
+        final String hpno = SaveSharedPreferences.getPrefHpno(TrackOrderActivity.this);
         final TimeAdapter timeAdapter = new TimeAdapter(this, R.layout.view_row_layout);
         timeListView.setAdapter(timeAdapter);
 
@@ -101,7 +110,7 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 ViewGroup vg = (ViewGroup) view;
                                 TextView textView = (TextView) vg.findViewById(R.id.orderIdText);
-                                Intent intent = new Intent(TrackWaitingTimeActivity.this, OrderInfomationActivity.class);
+                                Intent intent = new Intent(TrackOrderActivity.this, OrderInfomationActivity.class);
                                 intent.putExtra("order_id", textView.getText().toString());
                                 startActivity(intent);
                             }
@@ -115,9 +124,9 @@ public class TrackWaitingTimeActivity extends AppCompatActivity {
                 }
             }
         };
-        TrackWaitingTimeRequest trackWaitingTimeRequest = new TrackWaitingTimeRequest(hpno, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(TrackWaitingTimeActivity.this);
-        queue.add(trackWaitingTimeRequest);
+        TrackOrderRequest trackOrderRequest = new TrackOrderRequest(hpno, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(TrackOrderActivity.this);
+        queue.add(trackOrderRequest);
     }
 
     public void swipeToRefresh() {

@@ -1,9 +1,15 @@
 package wqyap762.rprqs;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -50,7 +56,22 @@ public class ViewOrderActivity extends AppCompatActivity {
 
         orderListView = (ListView) findViewById(R.id.orderListView);
 
-        getOrderList();
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo!=null && networkInfo.isConnected()) {
+            getOrderList();
+        } else {
+            AlertDialog.Builder networkNotFound = new AlertDialog.Builder(ViewOrderActivity.this);
+            networkNotFound.setTitle("Network Error");
+            networkNotFound.setMessage("Please check your internet connection.");
+            networkNotFound.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    NavUtils.navigateUpFromSameTask(ViewOrderActivity.this);
+                }
+            });
+            networkNotFound.show();
+        }
 
         swipeToRefresh();
     }

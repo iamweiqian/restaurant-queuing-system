@@ -46,7 +46,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         trackWaitingTimeButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        goToTrackWaitingTimeActivity();
+                        goToTrackOrderActivity();
                     }
                 }
         );
@@ -166,8 +166,8 @@ public class CustomerMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToTrackWaitingTimeActivity() {
-        Intent intent = new Intent(this, TrackWaitingTimeActivity.class);
+    public void goToTrackOrderActivity() {
+        Intent intent = new Intent(this, TrackOrderActivity.class);
         startActivity(intent);
     }
 

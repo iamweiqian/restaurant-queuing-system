@@ -1,8 +1,11 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,36 +83,51 @@ public class RegisterActivity extends AppCompatActivity {
                         // if all fields filled
                         if (!TextUtils.isEmpty(nameText.getText().toString()) && !TextUtils.isEmpty(hpnoText.getText().toString()) && !TextUtils.isEmpty(passwordText.getText().toString()) && !TextUtils.isEmpty(confirmPasswordText.getText().toString())) {
                             if (passwordText.getText().toString().equals(confirmPasswordText.getText().toString())) {
-                                AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterActivity.this);
+                                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                                if (networkInfo!=null && networkInfo.isConnected()) {
+                                    AlertDialog.Builder orderConfirm = new AlertDialog.Builder(RegisterActivity.this);
 
-                                // setting dialog title
-                                orderConfirm.setTitle("Confirm Register");
+                                    // setting dialog title
+                                    orderConfirm.setTitle("Confirm Register");
 
-                                // setting dialog message
-                                orderConfirm.setMessage("Do you want to continue?");
+                                    // setting dialog message
+                                    orderConfirm.setMessage("Do you want to continue?");
 
-                                // setting icon to dialog
-                                //orderConfirm.setIcon(R.drawable.save);
+                                    // setting icon to dialog
+                                    //orderConfirm.setIcon(R.drawable.save);
 
-                                // setting positive "Proceed" button
-                                orderConfirm.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // user press Proceed button. Write logic here
-                                        registerButtonClicked(v);
-                                    }
-                                });
+                                    // setting positive "Proceed" button
+                                    orderConfirm.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // user press Proceed button. Write logic here
+                                            registerButtonClicked(v);
+                                        }
+                                    });
 
-                                // setting neutral "Cancel" button
-                                orderConfirm.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // user press Cancel button. Write login here
-                                        dialog.dismiss();
-                                    }
-                                });
+                                    // setting neutral "Cancel" button
+                                    orderConfirm.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // user press Cancel button. Write login here
+                                            dialog.dismiss();
+                                        }
+                                    });
 
-                                orderConfirm.show();
+                                    orderConfirm.show();
+                                } else {
+                                    android.support.v7.app.AlertDialog.Builder networkNotFound = new android.support.v7.app.AlertDialog.Builder(RegisterActivity.this);
+                                    networkNotFound.setTitle("Network Error");
+                                    networkNotFound.setMessage("No Internet Connection.");
+                                    networkNotFound.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    networkNotFound.show();
+                                }
                             } else {
                                 passwordText.setText("");
                                 confirmPasswordText.setText("");

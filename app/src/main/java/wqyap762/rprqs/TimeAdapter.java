@@ -113,7 +113,7 @@ public class TimeAdapter extends ArrayAdapter {
 
     public void readyAlert() {
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Intent intent = new Intent(getContext(), TrackWaitingTimeActivity.class);
+        Intent intent = new Intent(getContext(), TrackOrderActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivities(getContext(), 0, new Intent[]{intent}, 0);
         Notification notification = new NotificationCompat.Builder(getContext())
                 .setTicker("TickerTitle")

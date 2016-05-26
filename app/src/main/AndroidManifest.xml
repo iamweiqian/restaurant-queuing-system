@@ -114,7 +114,7 @@
                 android:value=".ViewOrderActivity" />
         </activity>
         <activity
-            android:name=".TrackWaitingTimeActivity"
+            android:name=".TrackOrderActivity"
             android:label="@string/title_activity_track_waiting_time"
             android:parentActivityName=".CustomerMainActivity">
             <meta-data

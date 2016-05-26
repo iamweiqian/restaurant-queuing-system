@@ -1,17 +1,19 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -70,8 +72,24 @@ public class ItemActivity extends AppCompatActivity {
         increaseButton = (Button) findViewById(R.id.increaseButton);
 
         decreaseButton.setEnabled(false);
-        new downloadImage().execute();
-        getItemInformation();
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo!=null && networkInfo.isConnected()) {
+            new downloadImage().execute();
+            getItemInformation();
+        } else {
+            android.support.v7.app.AlertDialog.Builder networkNotFound = new android.support.v7.app.AlertDialog.Builder(ItemActivity.this);
+            networkNotFound.setTitle("Network Error");
+            networkNotFound.setMessage("Please check your internet connection.");
+            networkNotFound.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    NavUtils.navigateUpFromSameTask(ItemActivity.this);
+                }
+            });
+            networkNotFound.show();
+        }
         totalPriceCalculated();
         operatingHours();
     }
@@ -96,34 +114,49 @@ public class ItemActivity extends AppCompatActivity {
             orderButton.setOnClickListener(
                     new Button.OnClickListener() {
                         public void onClick(final View v) {
-                            final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(ItemActivity.this);
+                            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                            if (networkInfo!=null && networkInfo.isConnected()) {
+                                final AlertDialog.Builder orderConfirm = new AlertDialog.Builder(ItemActivity.this);
 
-                            // setting dialog title
-                            orderConfirm.setTitle("Confirm Order");
+                                // setting dialog title
+                                orderConfirm.setTitle("Confirm Order");
 
-                            // setting dialog message
-                            orderConfirm.setMessage("Do you want to continue?");
+                                // setting dialog message
+                                orderConfirm.setMessage("Do you want to continue?");
 
-                            // setting positive "Proceed" button
-                            orderConfirm.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // user press Proceed button. Write logic here
-                                    spinner.setVisibility(View.VISIBLE);
-                                    orderButtonClicked(v);
-                                }
-                            });
+                                // setting positive "Proceed" button
+                                orderConfirm.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // user press Proceed button. Write logic here
+                                        spinner.setVisibility(View.VISIBLE);
+                                        orderButtonClicked(v);
+                                    }
+                                });
 
-                            // setting neutral "Cancel" button
-                            orderConfirm.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // user press Cancel button. Write login here
-                                    dialog.dismiss();
-                                }
-                            });
+                                // setting neutral "Cancel" button
+                                orderConfirm.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // user press Cancel button. Write login here
+                                        dialog.dismiss();
+                                    }
+                                });
 
-                            orderConfirm.show();
+                                orderConfirm.show();
+                            } else {
+                                final android.support.v7.app.AlertDialog.Builder networkNotFound = new android.support.v7.app.AlertDialog.Builder(ItemActivity.this);
+                                networkNotFound.setTitle("Network Error");
+                                networkNotFound.setMessage("Please check your internet connection.");
+                                networkNotFound.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                networkNotFound.show();
+                            }
                         }
                     }
             );
@@ -356,7 +389,7 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     public void goToTrackOrderActivity() {
-        Intent intent = new Intent(this, TrackWaitingTimeActivity.class);
+        Intent intent = new Intent(this, TrackOrderActivity.class);
         startActivity(intent);
     }
 }

@@ -1,7 +1,10 @@
 package wqyap762.rprqs;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,8 +60,23 @@ public class LoginActivity extends AppCompatActivity {
                             hpnoText.setError("Please enter username");
                             passwordText.setError("Please enter password");
                         } else {
-                            spinner.setVisibility(View.VISIBLE);
-                            loginButtonClicked(v);
+                            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                            if (networkInfo!=null && networkInfo.isConnected()) {
+                                spinner.setVisibility(View.VISIBLE);
+                                loginButtonClicked(v);
+                            } else {
+                                android.support.v7.app.AlertDialog.Builder networkNotFound = new android.support.v7.app.AlertDialog.Builder(LoginActivity.this);
+                                networkNotFound.setTitle("Network Error");
+                                networkNotFound.setMessage("Please check your internet conenction.");
+                                networkNotFound.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                networkNotFound.show();
+                            }
                         }
                     }
                 }
