@@ -17,7 +17,7 @@ function registerUser() {
 }
 
 function hpnoAvailable() {
-	global $con, $username;
+	global $con, $hpno;
 	$statement = mysqli_prepare($con, "SELECT * FROM User WHERE hpno = ?");
 	mysqli_stmt_bind_param($statement, "s", $hpno);
 	mysqli_execute($statement);
