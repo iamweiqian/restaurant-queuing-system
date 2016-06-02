@@ -223,6 +223,7 @@ public class ItemActivity extends AppCompatActivity {
                         foodNameText.setText(food_name);
                         descriptionText.setText(description);
                         basicPriceText.setText(String.format("%.2f", basic_price));
+                        totalPriceText.setText(String.format("%.2f", basic_price));
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
                         builder.setMessage("Item Retrieve Failed")
